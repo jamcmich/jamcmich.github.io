@@ -43,6 +43,11 @@ export default {
     align-items: center;
     gap: 64px;
 
+    color: var(--mud);
+    font-family: var(--overclock);
+    font-weight:;
+    font-size: var(--paragraph);
+
     list-style-type: none;
   }
 }

@@ -23,26 +23,30 @@ export default {
 /* Global Variables */
 :root {
   /* Spacing */
-  --page-padding: 0 200px;
+  --padding_page: 0 200px;
 
   /* Font Families */
-  --overclock: 'Overclock', cursive;
-  --signika: 'Signika', sans-serif;
-  --pt-sans: 'PT Sans', sans-serif;
+  --font-family__overclock: 'Overclock', cursive;
+  --font-family__signika: 'Signika', sans-serif;
+  --font-family__pt-sans: 'PT Sans', sans-serif;
 
   /* Font Sizes */
-  --button: "1.5rem";
-  --paragraph: "2rem";
-  --subheading: "2rem";
-  --heading: "4.5rem";
+  --text-size__button: "1.5rem";
+  --text-size__paragraph: "2rem";
+  --text-size__subheading: "2rem";
+  --text-size__heading: "4.5rem";
 
   /* Font Weights */
+  --text-weight__black: 900;
+  --text-weight__bold: 700;
+  --text-weight__semi-bold: 600;
+  --text-weight__light: 300;
 
   /* Colors */
-  --pure-white: rgba(255, 255, 255, 1);
-  --macaroon: rgba(255, 232, 214, 1);
-  --wool: rgba(221, 190, 169, 1);
-  --mud: rgba(99, 76, 61, 1);
+  --color__pure-white: rgba(255, 255, 255, 1);
+  --color__macaroon: rgba(255, 232, 214, 1);
+  --color__wool: rgba(221, 190, 169, 1);
+  --color__mud: rgba(99, 76, 61, 1);
 }
 
 /* Credit: https://www.joshwcomeau.com/css/custom-css-reset/ */
