@@ -10,24 +10,16 @@
         <Link text="Read More"/>
       </div>
     </div>
-
-    <div class="right-column">
-      <div class="menu-container">
-        <Menu/>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
 import Link from "@/components/Link";
-import Menu from "@/components/icons/Menu";
 
 export default {
   name: "AboutPage",
   components: {
     Link,
-    Menu,
   },
 };
 </script>
@@ -41,8 +33,55 @@ export default {
 
   width: 100%;
   height: 100%;
-  padding: var(--page-padding);
+  padding: 0 200px;
 
-  background-color: var(--macaroon);
+  background-color: var(--color__macaroon);
+
+  .__main-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 96px;
+
+    .__img {
+      width: 400px;
+      box-shadow: 12px 12px 0 var(--color__wool);
+    }
+
+    .__text-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 48px;
+
+      h1 {
+        font-family: var(--font-family__signika);
+        font-weight: var(--font-weight__regular);
+        font-size: var(--font-size__heading);
+        color: var(--color__wool);
+        line-height: 1.15;
+
+        span {
+          font-family: var(--font-family__overlock);
+          font-weight: var(--font-weight__black);
+          color: var(--color__mud);
+        }
+      }
+
+      p {
+        font-family: var(--font-family__pt-sans);
+        font-weight: var(--font-weight__regular);
+        font-size: var(--font-size__paragraph);
+
+        max-width: 700px;
+
+        span {
+          font-weight: var(--font-weight__bold);
+        }
+      }
+    }
+  }
 }
 </style>

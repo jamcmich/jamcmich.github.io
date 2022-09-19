@@ -3,7 +3,7 @@
     <Logo class="__logo"/>
 
     <ul class="__nav-links">
-      <li class="__link">About</li>
+      <li class="__link __active">About</li>
       <li class="__link">Projects</li>
       <li class="__link">Contact</li>
     </ul>
@@ -24,7 +24,7 @@ export default {
 <style lang="scss" scoped>
 .navbar-component {
   position: absolute;
-  top: 0;
+  top: 30px;
 
   display: flex;
   flex-direction: row;
@@ -33,22 +33,28 @@ export default {
 
   width: 100%;
   height: 100px;
+  padding: 0 200px;
 
-  background-color: var(--macaroon);
+  background-color: transparent;
 
   .__nav-links {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 64px;
+    gap: 72px;
 
-    color: var(--mud);
-    font-family: var(--overclock);
-    font-weight:;
-    font-size: var(--paragraph);
+    color: var(--color__wool);
+    font-family: var(--font-family__signika);
+    font-weight: var(--font-weight__regular);
+    font-size: var(--font-size__subheading);
 
     list-style-type: none;
+
+    .__active {
+      color: var(--color__mud);
+      font-weight: var(--font-weight__semi-bold);
+    }
   }
 }
 </style>

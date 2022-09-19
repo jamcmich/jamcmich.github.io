@@ -18,29 +18,26 @@ export default {
 
 <style>
 /* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Overlock:wght@900&family=PT+Sans:wght@700&family=Signika:wght@300;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Overlock:wght@900&family=PT+Sans:wght@400;700&family=Signika:wght@400;600&display=swap');
 
 /* Global Variables */
 :root {
-  /* Spacing */
-  --padding_page: 0 200px;
-
   /* Font Families */
-  --font-family__overclock: 'Overclock', cursive;
+  --font-family__overlock: 'Overlock', cursive;
   --font-family__signika: 'Signika', sans-serif;
   --font-family__pt-sans: 'PT Sans', sans-serif;
 
   /* Font Sizes */
-  --text-size__button: "1.5rem";
-  --text-size__paragraph: "2rem";
-  --text-size__subheading: "2rem";
-  --text-size__heading: "4.5rem";
+  --font-size__heading: 4.5rem;
+  --font-size__subheading: 2rem;
+  --font-size__paragraph: 2rem;
+  --font-size__button: 1.5rem;
 
   /* Font Weights */
-  --text-weight__black: 900;
-  --text-weight__bold: 700;
-  --text-weight__semi-bold: 600;
-  --text-weight__light: 300;
+  --font-weight__black: 900;
+  --font-weight__bold: 700;
+  --font-weight__semi-bold: 600;
+  --font-weight__regular: 400;
 
   /* Colors */
   --color__pure-white: rgba(255, 255, 255, 1);
@@ -104,7 +101,7 @@ p, h1, h2, h3, h4, h5, h6 {
   height: 100%;
 
   font-size: 16px;
-  color: var(--charcoal);
+  color: var(--color__mud);
 
   background-color: red;
 }
