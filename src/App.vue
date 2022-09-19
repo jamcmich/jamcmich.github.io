@@ -75,6 +75,14 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 #app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  width: 100%;
+  height: 100%;
+
   font-size: 16px;
   color: var(--charcoal);
 
