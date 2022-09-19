@@ -1,13 +1,16 @@
 <template>
+  <Navbar/>
   <About/>
 </template>
 
 <script>
+import Navbar from "@/components/Navbar";
 import About from "@/pages/About";
 
 export default {
   name: "App",
   components: {
+    Navbar,
     About,
   },
 };
@@ -19,14 +22,27 @@ export default {
 
 /* Global Variables */
 :root {
-  --salmon: rgba(203, 153, 126, 1);
+  /* Spacing */
+  --page-padding: 0 200px;
+
+  /* Font Families */
+  --overclock: 'Overclock', cursive;
+  --signika: 'Signika', sans-serif;
+  --pt-sans: 'PT Sans', sans-serif;
+
+  /* Font Sizes */
+  --button: "1.5rem";
+  --paragraph: "2rem";
+  --subheading: "2rem";
+  --heading: "4.5rem";
+
+  /* Font Weights */
+
+  /* Colors */
+  --pure-white: rgba(255, 255, 255, 1);
+  --macaroon: rgba(255, 232, 214, 1);
   --wool: rgba(221, 190, 169, 1);
-  --cream: rgba(255, 228, 207, 1);
-  --forest-gray: rgba(184, 184, 165, 1);
-  --forest: rgba(165, 165, 141, 1);
-  --shutter-green: rgba(107, 112, 92, 1);
-  --charcoal: rgba(84, 76, 70, 1);
-  --sugar-milk: rgba(255, 250, 246, 1);
+  --mud: rgba(99, 76, 61, 1);
 }
 
 /* Credit: https://www.joshwcomeau.com/css/custom-css-reset/ */
