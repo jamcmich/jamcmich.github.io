@@ -17,7 +17,9 @@
     </div>
 
     <div class="right-column">
-
+      <div class="menu-container">
+        <Menu/>
+      </div>
     </div>
   </div>
 </template>
@@ -25,17 +27,19 @@
 <script>
 import Logo from "@/components/icons/Logo";
 import Link from "@/components/Link";
+import Menu from "@/components/icons/Menu";
 
 export default {
   name: "AboutPage",
   components: {
     Logo,
     Link,
+    Menu,
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .about-container {
   display: flex;
   flex-direction: row;
@@ -73,7 +77,7 @@ export default {
     gap: 4.5rem;
 
     img {
-      width: 80%;
+      width: 300px;
       border: 3px solid var(--salmon);
       box-shadow: -12px 12px 0px var(--salmon);
     }
@@ -111,7 +115,44 @@ export default {
   }
 
   .right-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     min-width: 300px;
+
+    .menu-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      width: 80px;
+      height: 80px;
+
+      border: 3px solid var(--salmon);
+      border-radius: 100px;
+      background-color: var(--cream);
+
+      cursor: pointer;
+      transition: background-color 0.4s 0s ease;
+
+      &:hover {
+        .menu {
+          path {
+            fill: var(--cream);
+            transition: fill 0.4s 0s ease;
+          }
+        }
+
+        background-color: var(--salmon);
+        transition: background-color 0.4s 0s ease;
+      }
+
+      .menu {
+
+      }
+    }
   }
 }
 </style>
