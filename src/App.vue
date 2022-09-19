@@ -17,6 +17,18 @@ export default {
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Overlock:wght@900&family=PT+Sans:wght@700&family=Signika:wght@300&display=swap');
 
+/* Global Variables */
+:root {
+  --salmon: rgba(203, 153, 126, 1);
+  --wool: rgba(221, 190, 169, 1);
+  --cream: rgba(255, 228, 207, 1);
+  --forest-gray: rgba(184, 184, 165, 1);
+  --forest: rgba(165, 165, 141, 1);
+  --shutter-green: rgba(107, 112, 92, 1);
+  --charcoal: rgba(56, 50, 46, 1);
+  --sugar-milk: rgba(255, 250, 246, 1);
+}
+
 /* Credit: https://www.joshwcomeau.com/css/custom-css-reset/ */
 /* 1. Use a more-intuitive box-sizing model. */
 *, *::before, *::after {
@@ -63,6 +75,9 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 #app {
-  background-color: ;
+  font-size: 16px;
+  color: var(--charcoal);
+
+  background-color: red;
 }
 </style>
