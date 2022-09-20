@@ -3,8 +3,9 @@
     <div class="__main-content">
       <img class="__img" src="@/assets/portrait.png" alt="An image of Jacob McMichael."/>
       <div class="__text-container">
-        <h1>Hi, I'm<br><span>Jacob McMichael</span></h1>
-        <p>I'm a <span>Frontend Web Developer</span> from California with a passion for helping individuals and
+        <h1>Hi, I'm<br><span data-text="Jacob McMichael">Jacob McMichael</span></h1>
+        <p>I'm a <span data-text="Frontend Web Developer">Frontend Web Developer</span> from California with a passion
+          for helping individuals and
           organizations
           accomplish their goals.</p>
         <Link text="Read More"/>
@@ -25,6 +26,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@keyframes colorFadeIn {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
 .about-page {
   display: flex;
   flex-direction: row;
@@ -64,9 +75,22 @@ export default {
         line-height: 1.15;
 
         span {
+          position: relative;
+
           font-family: var(--font-family__overlock);
           font-weight: var(--font-weight__black);
           color: var(--color__mud);
+
+          &::before {
+            content: attr(data-text);
+            position: absolute;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 0;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0) 65%, var(--color__wool) 65%);
+
+            animation: 1.4s ease 0s forwards colorFadeIn;
+          }
         }
       }
 
@@ -78,7 +102,19 @@ export default {
         max-width: 700px;
 
         span {
+          position: relative;
           font-weight: var(--font-weight__bold);
+
+          &::before {
+            content: attr(data-text);
+            position: absolute;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 0;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0) 65%, var(--color__wool) 65%);
+
+            animation: 1.4s ease 1s forwards colorFadeIn;
+          }
         }
       }
     }
