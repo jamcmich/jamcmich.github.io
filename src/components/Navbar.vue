@@ -84,7 +84,6 @@ export default {
     }
 
     &:hover {
-      outline: 2px solid var(--color__wool);
       transition: all 0.1s ease 0.2s;
 
       /* Foreground */
