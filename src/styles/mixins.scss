@@ -1,0 +1,42 @@
+/* Animations */
+@keyframes highlightOnLoad {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+/* Mixins */
+@mixin __highlight-on-hover($text-color, $highlight-color) {
+  &:before {
+    content: attr(data-text);
+    position: absolute;
+    width: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 65%, $highlight-color 65%);
+
+    transition: all 0.4s ease;
+  }
+
+  &:hover::before {
+    width: 100%;
+    color: $text-color;
+
+    transition: all 0.4s ease;
+  }
+}
+
+@mixin __highlight-on-load($highlight-color, $animation-delay: 0s) {
+  &::before {
+    content: attr(data-text);
+    position: absolute;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 65%, var(--color__wool) 65%);
+
+    animation: 1.4s ease $animation-delay forwards highlightOnLoad;
+  }
+}

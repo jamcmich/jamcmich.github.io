@@ -26,16 +26,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@keyframes colorFadeIn {
-  0% {
-    width: 0;
-  }
-
-  100% {
-    width: 100%;
-  }
-}
-
 .about-page {
   display: flex;
   flex-direction: row;
@@ -81,16 +71,7 @@ export default {
           font-weight: var(--font-weight__black);
           color: var(--color__mud);
 
-          &::before {
-            content: attr(data-text);
-            position: absolute;
-            overflow: hidden;
-            white-space: nowrap;
-            width: 0;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0) 65%, var(--color__wool) 65%);
-
-            animation: 1.4s ease 0s forwards colorFadeIn;
-          }
+          @include __highlight-on-load(var(--color__wool));
         }
       }
 
@@ -105,16 +86,7 @@ export default {
           position: relative;
           font-weight: var(--font-weight__bold);
 
-          &::before {
-            content: attr(data-text);
-            position: absolute;
-            overflow: hidden;
-            white-space: nowrap;
-            width: 0;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0) 65%, var(--color__wool) 65%);
-
-            animation: 1.4s ease 1s forwards colorFadeIn;
-          }
+          @include __highlight-on-load(var(--color__wool), 1s);
         }
       }
     }

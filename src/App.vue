@@ -16,7 +16,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Nabla&family=Overlock:wght@900&family=PT+Sans:wght@400;700&family=Signika:wght@400;600&display=swap');
 

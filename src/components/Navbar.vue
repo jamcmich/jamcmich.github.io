@@ -3,7 +3,6 @@
     <a class="__logo" href="/">
       <p>JM</p>
       <p>JM</p>
-      <!--      <p>JM</p>-->
     </a>
 
     <ul class="__nav-links">
@@ -118,21 +117,7 @@ export default {
       position: relative;
       cursor: pointer;
 
-      &:before {
-        content: attr(data-text);
-        position: absolute;
-        width: 0;
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0) 65%, var(--color__wool) 65%);
-
-        transition: all 0.4s ease;
-      }
-
-      &:hover::before {
-        width: 100%;
-        color: var(--color__mud);
-
-        transition: all 0.4s ease;
-      }
+      @include __highlight-on-hover(var(--color__mud), var(--color__wool));
     }
 
     .__active {

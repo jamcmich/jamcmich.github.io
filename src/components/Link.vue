@@ -1,9 +1,8 @@
 <template>
   <a>
     {{ text }}
-    <ArrowUpRight :iconSize="iconSize"/>
+    <ArrowUpRight :iconSize="iconSize" :iconColor="iconColor"/>
   </a>
-
 </template>
 
 <script>
@@ -17,13 +16,17 @@ export default {
   props: {
     iconSize: {
       type: String,
-      default: "30px",
+      default: "28px",
+    },
+    iconColor: {
+      type: String,
+      default: "var(--color__mud)",
     },
     text: String,
     textColor: String,
     highlightColor: {
       type: String,
-      default: "var(--salmon)",
+      default: "var(--color__wool)",
     },
   },
 };
@@ -37,25 +40,17 @@ a {
   align-items: center;
   gap: 16px;
 
-  font-family: 'PT Sans', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--charcoal);
+  font-family: var(--font-family__pt-sans);
+  font-size: var(--font-size__button);
+  font-weight: var(--font-weight__bold);
+  color: var(--color__mud);
 
   border: none;
   background: none;
-  background-repeat: no-repeat;
-  background-size: 0 40%;
-  background-position: 0 90%;
 
   transition: background-size 0.4s 0s ease;
 
   &:hover {
-    background: linear-gradient(120deg, var(--salmon) 0%, var(--salmon) 100%);
-    background-repeat: no-repeat;
-    background-size: 100% 40%;
-    background-position: 0 90%;
-
     cursor: pointer;
 
     transition: background-size 0.4s 0s ease;
