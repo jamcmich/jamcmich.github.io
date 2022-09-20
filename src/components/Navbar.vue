@@ -1,23 +1,21 @@
 <template>
   <nav class="navbar-component">
-    <Logo class="__logo"/>
+    <a class="__logo" href="/">
+      <p>JM</p>
+      <p>JM</p>
+    </a>
 
     <ul class="__nav-links">
-      <li class="__link __active">About</li>
-      <li class="__link">Projects</li>
-      <li class="__link">Contact</li>
+      <li class="__link __active" data-text="About">About</li>
+      <li class="__link" data-text="Projects">Projects</li>
+      <li class="__link" data-text="Contact">Contact</li>
     </ul>
   </nav>
 </template>
 
 <script>
-import Logo from "@/components/icons/Logo";
-
 export default {
   name: "NavbarComponent",
-  components: {
-    Logo,
-  },
 };
 </script>
 
@@ -37,6 +35,42 @@ export default {
 
   background-color: transparent;
 
+  .__logo {
+    position: relative;
+    font-family: var(--font-family__nabla);
+    font-weight: var(--font-weight__regular);
+    font-size: var(--font-size__logo);
+
+    text-decoration: none;
+    cursor: pointer;
+
+    /* Background */
+    p:nth-child(1) {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+
+      filter: brightness(0%) saturate(0%) contrast(100%) invert(100%) invert(28%) sepia(44%) saturate(328%) hue-rotate(340deg) brightness(96%) contrast(89%);
+    }
+
+    /* Foreground */
+    p:nth-child(2) {
+      position: relative;
+      top: 0;
+      left: 0;
+
+      filter: brightness(0%) saturate(0%) contrast(100%) invert(100%);
+
+      &:hover {
+        position: relative;
+
+        top: 3px;
+        left: 3px;
+        transition: all 0.1s linear;
+      }
+    }
+  }
+
   .__nav-links {
     display: flex;
     flex-direction: row;
@@ -50,6 +84,27 @@ export default {
     font-size: var(--font-size__subheading);
 
     list-style-type: none;
+
+    .__link {
+      position: relative;
+      cursor: pointer;
+
+      &:before {
+        content: attr(data-text);
+        position: absolute;
+        width: 0;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0) 65%, var(--color__wool) 65%);
+
+        transition: all 0.4s ease;
+      }
+
+      &:hover::before {
+        width: 100%;
+        color: var(--color__mud);
+
+        transition: all 0.4s ease;
+      }
+    }
 
     .__active {
       color: var(--color__mud);

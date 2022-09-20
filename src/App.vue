@@ -18,17 +18,19 @@ export default {
 
 <style>
 /* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Overlock:wght@900&family=PT+Sans:wght@400;700&family=Signika:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nabla&family=Overlock:wght@900&family=PT+Sans:wght@400;700&family=Signika:wght@400;600&display=swap');
 
 /* Global Variables */
 :root {
   /* Font Families */
+  --font-family__nabla: 'Nabla', cursive;
   --font-family__overlock: 'Overlock', cursive;
   --font-family__signika: 'Signika', sans-serif;
   --font-family__pt-sans: 'PT Sans', sans-serif;
 
   /* Font Sizes */
   --font-size__heading: 4.5rem;
+  --font-size__logo: 3rem;
   --font-size__subheading: 2rem;
   --font-size__paragraph: 2rem;
   --font-size__button: 1.5rem;
