@@ -1,7 +1,7 @@
 <template>
-  <a>
+  <a :data-text=text>
     {{ text }}
-    <ArrowUpRight :iconSize="iconSize" :iconColor="iconColor"/>
+    <ArrowUpRight :iconSize="iconSize" :iconColor="iconColor" />
   </a>
 </template>
 
@@ -14,19 +14,22 @@ export default {
     ArrowUpRight,
   },
   props: {
+    text: String,
+    textColor: {
+      type: String,
+      default: "red",
+    },
+    highlightColor: {
+      type: String,
+      default: "red",
+    },
     iconSize: {
       type: String,
       default: "28px",
     },
     iconColor: {
       type: String,
-      default: "$color__mud",
-    },
-    text: String,
-    textColor: String,
-    highlightColor: {
-      type: String,
-      default: "$color__wool",
+      default: (props) => props.textColor,
     },
   },
 };
@@ -34,6 +37,7 @@ export default {
 
 <style lang="scss" scoped>
 a {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -48,12 +52,10 @@ a {
   border: none;
   background: none;
 
-  transition: background-size 0.4s 0s ease;
-
   &:hover {
     cursor: pointer;
-
-    transition: background-size 0.4s 0s ease;
   }
+
+  @include __highlight-on-hover(v-bind(textColor), v-bind(highlightColor));
 }
 </style>

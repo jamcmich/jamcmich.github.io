@@ -1,6 +1,6 @@
 <template>
-  <Navbar/>
-  <About/>
+  <Navbar />
+  <About />
 </template>
 
 <script>

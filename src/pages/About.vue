@@ -1,14 +1,14 @@
 <template>
   <div class="about-page">
     <div class="__main-content">
-      <img class="__img" src="@/assets/portrait.png" alt="An image of Jacob McMichael."/>
+      <img class="__img" src="@/assets/portrait.png" alt="An image of Jacob McMichael." />
       <div class="__text-container">
         <h1>Hi, I'm<br><span data-text="Jacob McMichael">Jacob McMichael</span></h1>
         <p>I'm a <span data-text="Frontend Web Developer">Frontend Web Developer</span> from California with a passion
-          for helping individuals and
-          organizations
-          accomplish their goals.</p>
-        <Link text="Read More"/>
+           for helping individuals and
+           organizations
+           accomplish their goals.</p>
+        <Link text="Read More" textColor="rgba(99, 76, 61, 1)" highlightColor="rgba(221, 190, 169, 1)" />
       </div>
     </div>
   </div>
