@@ -3,6 +3,7 @@
     <a class="__logo" href="/">
       <p>JM</p>
       <p>JM</p>
+      <!--      <p>JM</p>-->
     </a>
 
     <ul class="__nav-links">
@@ -37,36 +38,65 @@ export default {
 
   .__logo {
     position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 100px;
+    height: 100px;
+
     font-family: var(--font-family__nabla);
     font-weight: var(--font-weight__regular);
     font-size: var(--font-size__logo);
 
+    background-color: transparent;
+    outline: 2px solid transparent;
+
     text-decoration: none;
     cursor: pointer;
+
+    transition: all 0.1s ease 0.2s;
 
     /* Background */
     p:nth-child(1) {
       position: absolute;
-      top: 3px;
-      left: 3px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
 
       filter: brightness(0%) saturate(0%) contrast(100%) invert(100%) invert(28%) sepia(44%) saturate(328%) hue-rotate(340deg) brightness(96%) contrast(89%);
+
+      transition: all 0.2s ease;
     }
 
     /* Foreground */
     p:nth-child(2) {
-      position: relative;
-      top: 0;
-      left: 0;
+      position: absolute;
+      top: 46%;
+      left: 46%;
+      transform: translate(-50%, -50%);
 
+      opacity: 100%;
       filter: brightness(0%) saturate(0%) contrast(100%) invert(100%);
 
-      &:hover {
-        position: relative;
+      transition: all 0.1s ease, opacity 0.4s ease 0.2s;
+    }
 
-        top: 3px;
-        left: 3px;
-        transition: all 0.1s linear;
+    &:hover {
+      outline: 2px solid #e8b18c;
+      transition: all 0.1s ease 0.2s;
+
+      /* Foreground */
+      p:nth-child(2) {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        opacity: 0;
+
+        transition: all 0.1s ease, opacity 0.4s ease 0.2s;
       }
     }
   }
