@@ -9,7 +9,7 @@ module.exports = defineConfig({
             sass: {
                 // @/ is an alias to src/
                 // so this assumes we have a file named `src/mixins.scss`
-                additionalData: `@import "@/styles/mixins.scss";`,
+                additionalData: `@import "@/styles/mixins.scss"; @import "@/styles/variables.scss";`,
             },
         },
     },

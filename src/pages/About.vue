@@ -36,7 +36,7 @@ export default {
   height: 100%;
   padding: 0 200px;
 
-  background-color: var(--color__macaroon);
+  background-color: $color__macaroon;
 
   .__main-content {
     display: flex;
@@ -47,7 +47,7 @@ export default {
 
     .__img {
       width: 400px;
-      box-shadow: 12px 12px 0 var(--color__wool);
+      box-shadow: 12px 12px 0 $color__wool;
     }
 
     .__text-container {
@@ -58,35 +58,35 @@ export default {
       gap: 48px;
 
       h1 {
-        font-family: var(--font-family__signika);
-        font-weight: var(--font-weight__regular);
-        font-size: var(--font-size__heading);
-        color: var(--color__wool);
+        font-family: $font-family__signika;
+        font-weight: $font-weight__regular;
+        font-size: $font-size__heading;
+        color: $color__wool;
         line-height: 1.15;
 
         span {
           position: relative;
 
-          font-family: var(--font-family__overlock);
-          font-weight: var(--font-weight__black);
-          color: var(--color__mud);
+          font-family: $font-family__overlock;
+          font-weight: $font-weight__black;
+          color: $color__mud;
 
-          @include __highlight-on-load(var(--color__wool));
+          @include __highlight-on-load($color__wool);
         }
       }
 
       p {
-        font-family: var(--font-family__pt-sans);
-        font-weight: var(--font-weight__regular);
-        font-size: var(--font-size__paragraph);
+        font-family: $font-family__pt-sans;
+        font-weight: $font-weight__regular;
+        font-size: $font-size__paragraph;
 
         max-width: 700px;
 
         span {
           position: relative;
-          font-weight: var(--font-weight__bold);
+          font-weight: $font-weight__bold;
 
-          @include __highlight-on-load(var(--color__wool), 1s);
+          @include __highlight-on-load($color__wool, 1s);
         }
       }
     }

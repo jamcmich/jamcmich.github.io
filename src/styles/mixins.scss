@@ -35,7 +35,7 @@
     overflow: hidden;
     white-space: nowrap;
     width: 0;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 65%, var(--color__wool) 65%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 65%, $highlight-color 65%);
 
     animation: 1.4s ease $animation-delay forwards highlightOnLoad;
   }

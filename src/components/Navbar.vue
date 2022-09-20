@@ -45,9 +45,9 @@ export default {
     width: 100px;
     height: 100px;
 
-    font-family: var(--font-family__nabla);
-    font-weight: var(--font-weight__regular);
-    font-size: var(--font-size__logo);
+    font-family: $font-family__nabla;
+    font-weight: $font-weight__regular;
+    font-size: $font-size__logo;
 
     background-color: transparent;
     outline: 2px solid transparent;
@@ -106,10 +106,10 @@ export default {
     align-items: center;
     gap: 72px;
 
-    color: var(--color__wool);
-    font-family: var(--font-family__signika);
-    font-weight: var(--font-weight__regular);
-    font-size: var(--font-size__subheading);
+    color: $color__wool;
+    font-family: $font-family__signika;
+    font-weight: $font-weight__regular;
+    font-size: $font-size__subheading;
 
     list-style-type: none;
 
@@ -117,12 +117,12 @@ export default {
       position: relative;
       cursor: pointer;
 
-      @include __highlight-on-hover(var(--color__mud), var(--color__wool));
+      @include __highlight-on-hover($color__mud, $color__wool);
     }
 
     .__active {
-      color: var(--color__mud);
-      font-weight: var(--font-weight__semi-bold);
+      color: $color__mud;
+      font-weight: $font-weight__semi-bold;
     }
   }
 }

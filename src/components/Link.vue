@@ -20,13 +20,13 @@ export default {
     },
     iconColor: {
       type: String,
-      default: "var(--color__mud)",
+      default: "$color__mud",
     },
     text: String,
     textColor: String,
     highlightColor: {
       type: String,
-      default: "var(--color__wool)",
+      default: "$color__wool",
     },
   },
 };
@@ -40,10 +40,10 @@ a {
   align-items: center;
   gap: 16px;
 
-  font-family: var(--font-family__pt-sans);
-  font-size: var(--font-size__button);
-  font-weight: var(--font-weight__bold);
-  color: var(--color__mud);
+  font-family: $font-family__pt-sans;
+  font-size: $font-size__button;
+  font-weight: $font-weight__bold;
+  color: $color__mud;
 
   border: none;
   background: none;
