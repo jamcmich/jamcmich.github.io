@@ -65,7 +65,7 @@ export default {
       left: 50%;
       transform: translate(-50%, -50%);
 
-      filter: brightness(0%) saturate(0%) contrast(100%) invert(100%) invert(28%) sepia(44%) saturate(328%) hue-rotate(340deg) brightness(96%) contrast(89%);
+      filter: brightness(0) saturate(100%) invert(82%) sepia(36%) saturate(221%) hue-rotate(338deg) brightness(92%) contrast(88%);
 
       transition: all 0.2s ease;
     }
@@ -84,7 +84,7 @@ export default {
     }
 
     &:hover {
-      outline: 2px solid #e8b18c;
+      outline: 2px solid var(--color__wool);
       transition: all 0.1s ease 0.2s;
 
       /* Foreground */
