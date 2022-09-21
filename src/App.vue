@@ -1,17 +1,20 @@
 <template>
   <Navbar />
   <About />
+  <Projects />
 </template>
 
 <script>
 import Navbar from "@/components/Navbar";
 import About from "@/pages/About";
+import Projects from "@/pages/Projects";
 
 export default {
   name: "App",
   components: {
     Navbar,
     About,
+    Projects,
   },
 };
 </script>
@@ -72,7 +75,7 @@ p, h1, h2, h3, h4, h5, h6 {
   align-items: center;
 
   width: 100%;
-  height: 100%;
+  height: auto;
 
   font-size: 16px;
   color: $color__mud;

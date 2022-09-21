@@ -26,14 +26,14 @@
 
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 65%, $highlight-color 65%);
 
-    transition: width 0.4s ease;
+    transition: width 0.4s ease, color 0.4s ease;
   }
 
   &:hover::before {
     width: 100%;
     color: $text-color;
 
-    transition: width 0.4s ease;
+    transition: width 0.4s ease, color 0.4s ease;
   }
 }
 

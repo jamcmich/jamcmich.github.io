@@ -1,5 +1,5 @@
 <template>
-  <div class="about-page">
+  <section class="about-page">
     <div class="__main-content">
       <img class="__img" src="@/assets/portrait.png" alt="An image of Jacob McMichael." />
       <div class="__text-container">
@@ -11,7 +11,7 @@
         <Link text="Read More" textColor="rgba(99, 76, 61, 1)" highlightColor="rgba(221, 190, 169, 1)" />
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -33,7 +33,7 @@ export default {
   align-items: center;
 
   width: 100%;
-  height: 100%;
+  height: 100vh;
   padding: 0 200px;
 
   background-color: $color__macaroon;
