@@ -1,8 +1,8 @@
 <template>
   <nav class="navbar-component">
-    <a class="__logo" href="/">
-      <p>JM</p>
-      <p>JM</p>
+    <a class="__logo-container" href="/">
+      <LogoBackground class="__logo" />
+      <LogoForeground class="__logo" />
     </a>
 
     <ul class="__nav-links">
@@ -14,11 +14,19 @@
 </template>
 
 <script>
+import LogoBackground from "@/components/icons/LogoBackground";
+import LogoForeground from "@/components/icons/LogoForeground";
+
 export default {
   name: "NavbarComponent",
+  components: {
+    LogoBackground,
+    LogoForeground,
+  },
   data() {
     return {
       isMoving: false,
+      isMovingDelay: 400,
       activeSection: 0,
       offsets: [],
       touchStartY: 0,
@@ -172,7 +180,7 @@ export default {
 
   background-color: transparent;
 
-  .__logo {
+  .__logo-container {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -195,26 +203,23 @@ export default {
     transition: all 0.1s ease 0.2s;
 
     /* Background */
-    p:nth-child(1) {
+    .__logo:nth-child(1) {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
 
-      filter: brightness(0) saturate(100%) invert(82%) sepia(36%) saturate(221%) hue-rotate(338deg) brightness(92%) contrast(88%);
-
       transition: all 0.2s ease;
     }
 
     /* Foreground */
-    p:nth-child(2) {
+    .__logo:nth-child(2) {
       position: absolute;
-      top: 46%;
-      left: 46%;
+      top: 45%;
+      left: 45%;
       transform: translate(-50%, -50%);
 
       opacity: 100%;
-      filter: brightness(0%) saturate(0%) contrast(100%) invert(100%);
 
       transition: all 0.1s ease, opacity 0.4s ease 0.2s;
     }
@@ -223,7 +228,7 @@ export default {
       transition: all 0.1s ease 0.2s;
 
       /* Foreground */
-      p:nth-child(2) {
+      .__logo:nth-child(2) {
         position: absolute;
         top: 50%;
         left: 50%;
