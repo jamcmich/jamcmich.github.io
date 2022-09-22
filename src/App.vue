@@ -2,12 +2,14 @@
   <Navbar />
   <About />
   <Projects />
+  <Contact />
 </template>
 
 <script>
 import Navbar from "@/components/Navbar";
 import About from "@/pages/About";
 import Projects from "@/pages/Projects";
+import Contact from "@/pages/Contact";
 
 export default {
   name: "App",
@@ -15,6 +17,7 @@ export default {
     Navbar,
     About,
     Projects,
+    Contact,
   },
 };
 </script>

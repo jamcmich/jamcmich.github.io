@@ -53,9 +53,9 @@ export default {
     handleMouseWheel: function (e) {
       console.log(e.deltaY);
 
-      if (e.deltaY < 0 && !this.isMoving) { // if the vertical scrolling value is greater than 0, we're moving up
+      if (e.deltaY > 0 && !this.isMoving) { // if the vertical scrolling value is greater than 0, we're moving up
         this.moveUp();
-      } else if (e.deltaY > 0 && !this.isMoving) { // if the vertical scrolling value is less than 0, we're moving down
+      } else if (e.deltaY < 0 && !this.isMoving) { // if the vertical scrolling value is less than 0, we're moving down
         this.moveDown();
       }
 
