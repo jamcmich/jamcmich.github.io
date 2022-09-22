@@ -28,12 +28,13 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .contact-section {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 48px;
 
   width: 100%;
   height: 100vh;
@@ -42,7 +43,37 @@ export default {
   background-color: $color__macaroon;
 
   h1 {
+    font-family: $font-family__overlock;
+    font-weight: $font-weight__black;
+    font-size: $font-size__heading;
     color: $color__mud;
+  }
+
+  .__icon-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+
+    .__icon {
+      path {
+        fill: $color__mud;
+      }
+
+      transition: all 0.4s ease;
+
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.25);
+
+        path {
+          fill: $color__syrup;
+        }
+
+        transition: all 0.4s ease;
+      }
+    }
   }
 }
 </style>

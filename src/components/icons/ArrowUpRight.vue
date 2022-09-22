@@ -5,7 +5,7 @@
     </g>
     <defs>
       <clipPath id="clip0_2_8529">
-        <rect width="24" height="24" fill="white" />
+        <rect :width=iconSize :height=iconSize fill="white" />
       </clipPath>
     </defs>
   </svg>
