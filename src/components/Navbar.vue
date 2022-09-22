@@ -6,9 +6,9 @@
     </a>
 
     <ul class="__nav-links">
-      <li class="__link __active" :class="updateNavigationLinks()" data-text="About">About</li>
-      <li class="__link" :class="updateNavigationLinks()" data-text="Projects">Projects</li>
-      <li class="__link" :class="updateNavigationLinks()" data-text="Contact">Contact</li>
+      <li class="__link __active" :class="updateNavigationLinks" data-text="About">About</li>
+      <li class="__link" :class="updateNavigationLinks" data-text="Projects">Projects</li>
+      <li class="__link" :class="updateNavigationLinks" data-text="Contact">Contact</li>
     </ul>
   </nav>
 </template>
@@ -26,11 +26,16 @@ export default {
   data() {
     return {
       isMoving: false,
-      isMovingDelay: 1000,
+      isMovingDelay: 0,
       activeSection: 0,
       offsets: [],
       touchStartY: 0,
     };
+  },
+  watch: {
+    isMoving: function (value) {
+      console.log(value);
+    },
   },
   methods: {
     /* Section Scrolling Reference: https://webdeasy.de/en/programming-vue-js-fullpage-scroll/ */
@@ -46,22 +51,11 @@ export default {
      * Handle the 'mousewheel' event for other browsers
      */
     handleMouseWheel: function (e) {
-      if (e.wheelDelta < 30 && !this.isMoving) {
-        this.moveUp();
-      } else if (e.wheelDelta > 30 && !this.isMoving) {
-        this.moveDown();
-      }
+      console.log(e.deltaY);
 
-      e.preventDefault();
-      return false;
-    },
-    /**
-     * Handle the 'DOMMouseScroll' event for Firefox
-     */
-    handleMouseWheelDOM: function (e) {
-      if (e.detail > 0 && !this.isMoving) {
+      if (e.deltaY < 0 && !this.isMoving) { // if the vertical scrolling value is greater than 0, we're moving up
         this.moveUp();
-      } else if (e.detail < 0 && !this.isMoving) {
+      } else if (e.deltaY > 0 && !this.isMoving) { // if the vertical scrolling value is less than 0, we're moving down
         this.moveDown();
       }
 
@@ -104,17 +98,11 @@ export default {
             ? links[i].classList.add("__active")
             : links[i].classList.remove("__active");
       }
-
-      return {
-        __altLink: this.activeSection % 2,
-      };
     },
     /**
      * Scrolls to the passed section id if the section exists and the delay is over
      */
     async scrollToSection(id, force = false) {
-      console.log(this.isMoving);
-
       if (this.isMoving && !force) return false;
 
       this.activeSection = id;
@@ -162,19 +150,17 @@ export default {
    * mounted() hook executes after page load and call the section offset calculation and registers all events
    */
   mounted() {
-    if (history.scrollRestoration) {
-      history.scrollRestoration = "manual";
-    } else {
-      window.onbeforeunload = function () {
-        window.scrollTo(0, 0);
-      };
-    }
+    // if (history.scrollRestoration) {
+    //   history.scrollRestoration = "manual";
+    // } else {
+    //   window.onbeforeunload = function () {
+    //     window.scrollTo(0, 0);
+    //   };
+    // }
 
     this.calculateSectionOffsets();
 
-    window.addEventListener("DOMMouseScroll", this.handleMouseWheelDOM);  // Mozilla Firefox
-    window.addEventListener("wheel", this.handleMouseWheel, {passive: false}); // Other browsers
-
+    window.addEventListener("wheel", this.handleMouseWheel, {passive: false});  // Mozilla Firefox
     window.addEventListener("touchstart", this.touchStart, {passive: false}); // mobile devices
     window.addEventListener("touchmove", this.touchMove, {passive: false}); // mobile devices
   },
@@ -182,9 +168,7 @@ export default {
    * unmounted() hook executes on page destroy and removes all registered event listeners
    */
   unmounted() {
-    window.removeEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
-    window.removeEventListener("wheel", this.handleMouseWheel, false);  // Other browsers
-
+    window.removeEventListener("wheel", this.handleMouseWheel); // Mozilla Firefox
     window.removeEventListener("touchstart", this.touchStart); // mobile devices
     window.removeEventListener("touchmove", this.touchMove); // mobile devices
   },
@@ -283,11 +267,15 @@ export default {
       position: relative;
       cursor: pointer;
 
+      transition: color 0.4s ease;
+
       @include __highlight-on-hover($color__mud, $color__wool);
     }
 
     .__alternative-link {
       color: $color__macaroon;
+
+      transition: color 0.4s ease;
 
       @include __highlight-on-hover($color__mud, $color__syrup);
     }
@@ -295,6 +283,8 @@ export default {
     .__active {
       color: $color__mud;
       font-weight: $font-weight__medium;
+
+      transition: color 0.4s ease;
     }
   }
 }
