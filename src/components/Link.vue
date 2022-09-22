@@ -44,7 +44,7 @@ a {
   align-items: center;
   gap: 16px;
 
-  font-family: $font-family__pt-sans;
+  font-family: $font-family__mulish;
   font-size: $font-size__button;
   font-weight: $font-weight__bold;
   color: $color__mud;

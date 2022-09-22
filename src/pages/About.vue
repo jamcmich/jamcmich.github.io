@@ -55,11 +55,11 @@ export default {
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-      gap: 48px;
+      gap: 64px;
 
       h1 {
-        font-family: $font-family__signika;
-        font-weight: $font-weight__regular;
+        font-family: $font-family__mulish;
+        font-weight: $font-weight__semi-bold;
         font-size: $font-size__subheading;
         color: $color__wool;
         line-height: 1.15;
@@ -77,7 +77,7 @@ export default {
       }
 
       p {
-        font-family: $font-family__pt-sans;
+        font-family: $font-family__mulish;
         font-weight: $font-weight__regular;
         font-size: $font-size__paragraph;
 

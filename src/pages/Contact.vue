@@ -8,6 +8,11 @@
       <LinkedIn class="__icon" />
       <Twitter class="__icon" />
     </div>
+
+    <!-- TODO: Add downloadable resume -->
+    <a class="__download-resume" href="../assets/resume.pdf" title="Click here to download my resume!">
+      Download Resume
+    </a>
   </section>
 </template>
 
@@ -74,6 +79,20 @@ export default {
         transition: all 0.4s ease;
       }
     }
+  }
+
+  .__download-resume {
+    padding: 16px 32px;
+
+    font-family: $font-family__mulish;
+    font-size: $font-size__button;
+    font-weight: $font-weight__regular;
+    color: $color__mud;
+    text-decoration: none;
+
+    border: 3px solid $color__mud;
+    border-radius: 4px;
+    background-color: $color__wool;
   }
 }
 </style>

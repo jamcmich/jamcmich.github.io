@@ -24,9 +24,8 @@ export default {
 
 <style lang="scss">
 /* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Nabla&family=Overlock:wght@900&family=PT+Sans:wght@400;700&family=Signika:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700&family=Overlock:wght@400;700;900&family=Signika:wght@400;500;600;700&display=swap'); /* Credit: https://www.joshwcomeau.com/css/custom-css-reset/ */
 
-/* Credit: https://www.joshwcomeau.com/css/custom-css-reset/ */
 /* 1. Use a more-intuitive box-sizing model. */
 *, *::before, *::after {
   box-sizing: border-box;
