@@ -6,9 +6,9 @@
     </a>
 
     <ul class="__nav-links">
-      <li class="__link __active" data-text="About">About</li>
-      <li class="__link" data-text="Projects">Projects</li>
-      <li class="__link" data-text="Contact">Contact</li>
+      <li class="__link __active" :class="updateNavigationLinks()" data-text="About">About</li>
+      <li class="__link" :class="updateNavigationLinks()" data-text="Projects">Projects</li>
+      <li class="__link" :class="updateNavigationLinks()" data-text="Contact">Contact</li>
     </ul>
   </nav>
 </template>
@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       isMoving: false,
-      isMovingDelay: 400,
+      isMovingDelay: 1000,
       activeSection: 0,
       offsets: [],
       touchStartY: 0,
@@ -46,7 +46,6 @@ export default {
      * Handle the 'mousewheel' event for other browsers
      */
     handleMouseWheel: function (e) {
-
       if (e.wheelDelta < 30 && !this.isMoving) {
         this.moveUp();
       } else if (e.wheelDelta > 30 && !this.isMoving) {
@@ -60,7 +59,6 @@ export default {
      * Handle the 'DOMMouseScroll' event for Firefox
      */
     handleMouseWheelDOM: function (e) {
-
       if (e.detail > 0 && !this.isMoving) {
         this.moveUp();
       } else if (e.detail < 0 && !this.isMoving) {
@@ -92,9 +90,31 @@ export default {
       this.scrollToSection(this.activeSection, true);
     },
     /**
+     * Changes the navigation links' colors and `active` class to contrast the background depending on the current section
+     */
+    updateNavigationLinks() {
+      let links = document.getElementsByClassName("__link");
+
+      for (let i = 0; i < links.length; i++) {
+        this.activeSection % 2
+            ? links[i].classList.add("__alternative-link")
+            : links[i].classList.remove("__alternative-link");
+
+        this.activeSection === i
+            ? links[i].classList.add("__active")
+            : links[i].classList.remove("__active");
+      }
+
+      return {
+        __altLink: this.activeSection % 2,
+      };
+    },
+    /**
      * Scrolls to the passed section id if the section exists and the delay is over
      */
-    scrollToSection(id, force = false) {
+    async scrollToSection(id, force = false) {
+      console.log(this.isMoving);
+
       if (this.isMoving && !force) return false;
 
       this.activeSection = id;
@@ -102,14 +122,14 @@ export default {
 
       // get section and scroll into view if it exists
       let section = document.getElementsByTagName("section")[id];
-      if (section) {
+      if (await section) {
         document.getElementsByTagName("section")[id].scrollIntoView({behavior: "smooth"});
+        this.updateNavigationLinks();
       }
 
       setTimeout(() => {
         this.isMoving = false;
       }, this.isMovingDelay);
-
     },
     /**
      * Handles the 'touchstart' event on mobile devices
@@ -142,10 +162,18 @@ export default {
    * mounted() hook executes after page load and call the section offset calculation and registers all events
    */
   mounted() {
+    if (history.scrollRestoration) {
+      history.scrollRestoration = "manual";
+    } else {
+      window.onbeforeunload = function () {
+        window.scrollTo(0, 0);
+      };
+    }
+
     this.calculateSectionOffsets();
 
     window.addEventListener("DOMMouseScroll", this.handleMouseWheelDOM);  // Mozilla Firefox
-    window.addEventListener("mousewheel", this.handleMouseWheel, {passive: false}); // Other browsers
+    window.addEventListener("wheel", this.handleMouseWheel, {passive: false}); // Other browsers
 
     window.addEventListener("touchstart", this.touchStart, {passive: false}); // mobile devices
     window.addEventListener("touchmove", this.touchMove, {passive: false}); // mobile devices
@@ -155,7 +183,7 @@ export default {
    */
   unmounted() {
     window.removeEventListener("DOMMouseScroll", this.handleMouseWheelDOM); // Mozilla Firefox
-    window.removeEventListener("mousewheel", this.handleMouseWheel, {passive: false});  // Other browsers
+    window.removeEventListener("wheel", this.handleMouseWheel, false);  // Other browsers
 
     window.removeEventListener("touchstart", this.touchStart); // mobile devices
     window.removeEventListener("touchmove", this.touchMove); // mobile devices
@@ -189,10 +217,6 @@ export default {
 
     width: 100px;
     height: 100px;
-
-    font-family: $font-family__nabla;
-    font-weight: $font-weight__regular;
-    font-size: $font-size__logo;
 
     background-color: transparent;
     outline: 2px solid transparent;
@@ -251,7 +275,7 @@ export default {
     color: $color__wool;
     font-family: $font-family__signika;
     font-weight: $font-weight__regular;
-    font-size: $font-size__subheading;
+    font-size: $font-size__paragraph;
 
     list-style-type: none;
 
@@ -262,9 +286,15 @@ export default {
       @include __highlight-on-hover($color__mud, $color__wool);
     }
 
+    .__alternative-link {
+      color: $color__macaroon;
+
+      @include __highlight-on-hover($color__mud, $color__syrup);
+    }
+
     .__active {
       color: $color__mud;
-      font-weight: $font-weight__semi-bold;
+      font-weight: $font-weight__medium;
     }
   }
 }

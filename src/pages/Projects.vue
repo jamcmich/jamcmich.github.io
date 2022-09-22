@@ -1,5 +1,6 @@
 <template>
-  <section class="projects-page">
+  <section class="projects-section" data-section="projects">
+    <p>Hello World</p>
   </section>
 </template>
 
@@ -11,7 +12,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.projects-page {
+.projects-section {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -21,6 +22,6 @@ export default {
   height: 100vh;
   padding: 0 200px;
 
-  background-color: $color__cappuccino;
+  background-color: $color__jacobean;
 }
 </style>

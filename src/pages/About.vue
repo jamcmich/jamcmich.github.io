@@ -1,5 +1,5 @@
 <template>
-  <section class="about-page">
+  <section class="about-section" data-section="about">
     <div class="__main-content">
       <img class="__img" src="@/assets/portrait.png" alt="An image of Jacob McMichael." />
       <div class="__text-container">
@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.about-page {
+.about-section {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -60,7 +60,7 @@ export default {
       h1 {
         font-family: $font-family__signika;
         font-weight: $font-weight__regular;
-        font-size: $font-size__heading;
+        font-size: $font-size__subheading;
         color: $color__wool;
         line-height: 1.15;
 
@@ -69,6 +69,7 @@ export default {
 
           font-family: $font-family__overlock;
           font-weight: $font-weight__black;
+          font-size: $font-size__heading;
           color: $color__mud;
 
           @include __highlight-on-load($color__wool);
