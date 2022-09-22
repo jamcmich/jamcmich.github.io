@@ -11,7 +11,7 @@
 
     <!-- TODO: Add downloadable resume -->
     <a class="__download-resume" href="../assets/resume.pdf" title="Click here to download my resume!">
-      Download Resume
+      Resume
     </a>
   </section>
 </template>
@@ -82,17 +82,31 @@ export default {
   }
 
   .__download-resume {
-    padding: 16px 32px;
+    padding: 8px 32px;
 
     font-family: $font-family__mulish;
     font-size: $font-size__button;
-    font-weight: $font-weight__regular;
+    font-weight: $font-weight__semi-bold;
     color: $color__mud;
     text-decoration: none;
 
+    background-color: transparent;
+
     border: 3px solid $color__mud;
     border-radius: 4px;
-    background-color: $color__wool;
+
+    transition: all 0.4s ease;
+
+    &:hover {
+      background-color: $color__wool;
+
+      transition: all 0.4s ease;
+    }
+
+    &:active {
+      color: $color__macaroon;
+      background-color: $color__mud;
+    }
   }
 }
 </style>

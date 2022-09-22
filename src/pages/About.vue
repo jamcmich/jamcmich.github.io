@@ -1,7 +1,7 @@
 <template>
   <section class="about-section" data-section="about">
     <div class="__main-content">
-      <img class="__img" src="@/assets/portrait.png" alt="An image of Jacob McMichael." />
+      <img class="__img" src="../assets/portrait.png" alt="An image of Jacob McMichael." />
       <div class="__text-container">
         <h1>Hi, I'm<br><span data-text="Jacob McMichael">Jacob McMichael</span></h1>
         <p>I'm a <span data-text="Frontend Web Developer">Frontend Web Developer</span> from California with a passion

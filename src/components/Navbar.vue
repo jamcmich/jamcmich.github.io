@@ -1,14 +1,14 @@
 <template>
   <nav class="navbar-component">
     <a class="__logo-container" href="/">
-      <LogoBackground class="__logo" />
-      <LogoForeground class="__logo" />
+      <LogoBackground class="__logo" :class="updateLogoStyles" />
+      <LogoForeground class="__logo" :class="updateLogoStyles" />
     </a>
 
     <ul class="__nav-links">
-      <li class="__link __active" :class="updateNavigationLinks" data-text="About">About</li>
-      <li class="__link" :class="updateNavigationLinks" data-text="Projects">Projects</li>
-      <li class="__link" :class="updateNavigationLinks" data-text="Contact">Contact</li>
+      <li class="__link __active" :class="updateLinkStyles" data-text="About">About</li>
+      <li class="__link" :class="updateLinkStyles" data-text="Projects">Projects</li>
+      <li class="__link" :class="updateLinkStyles" data-text="Contact">Contact</li>
     </ul>
   </nav>
 </template>
@@ -28,9 +28,25 @@ export default {
       isMoving: false,
       isMovingDelay: 0,
       activeSection: 0,
+      activeSectionName: "about",
       offsets: [],
       touchStartY: 0,
     };
+  },
+  computed: {
+    /**
+     * Changes the navigation link and logo colors to contrast the background depending on the current active section
+     */
+    updateLogoStyles() {
+      return {
+        "__alternative-logo": this.activeSection % 2,
+      };
+    },
+    updateLinkStyles() {
+      return {
+        "__alternative-link": this.activeSection % 2,
+      };
+    },
   },
   watch: {
     isMoving: function (value) {
@@ -84,22 +100,6 @@ export default {
       this.scrollToSection(this.activeSection, true);
     },
     /**
-     * Changes the navigation links' colors and `active` class to contrast the background depending on the current section
-     */
-    updateNavigationLinks() {
-      let links = document.getElementsByClassName("__link");
-
-      for (let i = 0; i < links.length; i++) {
-        this.activeSection % 2
-            ? links[i].classList.add("__alternative-link")
-            : links[i].classList.remove("__alternative-link");
-
-        this.activeSection === i
-            ? links[i].classList.add("__active")
-            : links[i].classList.remove("__active");
-      }
-    },
-    /**
      * Scrolls to the passed section id if the section exists and the delay is over
      */
     async scrollToSection(id, force = false) {
@@ -112,7 +112,7 @@ export default {
       let section = document.getElementsByTagName("section")[id];
       if (await section) {
         document.getElementsByTagName("section")[id].scrollIntoView({behavior: "smooth"});
-        this.updateNavigationLinks();
+        this.activeSectionName = section.dataset.section;
       }
 
       setTimeout(() => {
@@ -175,7 +175,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .navbar-component {
   position: fixed;
   z-index: 1000;
@@ -218,6 +218,12 @@ export default {
       transform: translate(-50%, -50%);
 
       transition: all 0.2s ease;
+
+      path {
+        fill: $color__wool;
+
+        transition: fill 0.4s ease;
+      }
     }
 
     /* Foreground */
@@ -230,6 +236,27 @@ export default {
       opacity: 100%;
 
       transition: all 0.1s ease, opacity 0.4s ease 0.2s;
+
+      path {
+        fill: $color__pure-white;
+
+        transition: fill 0.4s ease;
+      }
+    }
+
+    /* Background */
+    .__alternative-logo:nth-child(1) {
+      path {
+        fill: $color__syrup;
+
+        transition: fill 0.4s ease;
+      }
+    }
+
+    /* Foreground */
+    .__alternative-logo:nth-child(2) {
+
+      transition: fill 0.4s ease;
     }
 
     &:hover {
