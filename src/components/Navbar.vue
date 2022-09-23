@@ -1,14 +1,29 @@
 <template>
   <nav class="navbar-component">
     <a class="__logo-container" href="/">
-      <LogoBackground class="__logo" :class="updateLogoStyles" />
-      <LogoForeground class="__logo" :class="updateLogoStyles" />
+      <LogoBackground class="__logo" :class="{'__alternative-logo': this.activeSection % 2}" />
+      <LogoForeground class="__logo" :class="{'__alternative-logo': this.activeSection % 2}" />
     </a>
 
     <ul class="__nav-links">
-      <li class="__link __active" :class="updateLinkStyles" data-text="About">About</li>
-      <li class="__link" :class="updateLinkStyles" data-text="Projects">Projects</li>
-      <li class="__link" :class="updateLinkStyles" data-text="Contact">Contact</li>
+      <li class="__link __active"
+          @click="scrollToSection($event.target.dataset.id)"
+          data-text="About"
+          data-id=0>
+        About
+      </li>
+      <li class="__link"
+          @click="scrollToSection($event.target.dataset.id)"
+          data-text="Projects"
+          data-id=1>
+        Projects
+      </li>
+      <li class="__link"
+          @click="scrollToSection($event.target.dataset.id)"
+          data-text="Contact"
+          data-id=2>
+        Contact
+      </li>
     </ul>
   </nav>
 </template>
@@ -28,30 +43,37 @@ export default {
       isMoving: false,
       isMovingDelay: 0,
       activeSection: 0,
-      activeSectionName: "about",
       offsets: [],
       touchStartY: 0,
     };
+  },
+  watch: {
+    isMoving(value) {
+      console.log(value);
+    },
+    activeSection(value) {
+      let links = document.getElementsByClassName("__link");
+
+      for (let i = 0; i < links.length; i++) {
+        value % 2
+            ? links[i].classList.add("__alternative-link")
+            : links[i].classList.remove("__alternative-link");
+
+        value === i
+            ? links[i].classList.add("__active")
+            : links[i].classList.remove("__active");
+      }
+    },
   },
   computed: {
     /**
      * Changes the navigation link and logo colors to contrast the background depending on the current active section
      */
-    updateLogoStyles() {
-      return {
-        "__alternative-logo": this.activeSection % 2,
-      };
-    },
-    updateLinkStyles() {
-      return {
-        "__alternative-link": this.activeSection % 2,
-      };
-    },
-  },
-  watch: {
-    isMoving: function (value) {
-      console.log(value);
-    },
+    // updateLinkStyles() {
+    //   let logos = document.getElementsByClassName("__logo");
+    //   let links = document.getElementsByClassName("__link");
+    //
+    // },
   },
   methods: {
     /* Section Scrolling Reference: https://webdeasy.de/en/programming-vue-js-fullpage-scroll/ */
@@ -105,14 +127,13 @@ export default {
     async scrollToSection(id, force = false) {
       if (this.isMoving && !force) return false;
 
-      this.activeSection = id;
+      this.activeSection === id ? console.log("this is the current section") : this.activeSection = id;
       this.isMoving = true;
 
       // get section and scroll into view if it exists
       let section = document.getElementsByTagName("section")[id];
       if (await section) {
         document.getElementsByTagName("section")[id].scrollIntoView({behavior: "smooth"});
-        this.activeSectionName = section.dataset.section;
       }
 
       setTimeout(() => {
@@ -157,7 +178,6 @@ export default {
     //     window.scrollTo(0, 0);
     //   };
     // }
-
     this.calculateSectionOffsets();
 
     window.addEventListener("wheel", this.handleMouseWheel, {passive: false});  // Mozilla Firefox
