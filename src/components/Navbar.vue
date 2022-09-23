@@ -41,16 +41,16 @@ export default {
   data() {
     return {
       isMoving: false,
-      isMovingDelay: 0,
+      isMovingDelay: 400,
       activeSection: 0,
       offsets: [],
       touchStartY: 0,
     };
   },
   watch: {
-    isMoving(value) {
-      console.log(value);
-    },
+    /**
+     * Changes the navigation link and logo colors to contrast the background depending on the current active section
+     */
     activeSection(value) {
       let links = document.getElementsByClassName("__link");
 
@@ -64,16 +64,6 @@ export default {
             : links[i].classList.remove("__active");
       }
     },
-  },
-  computed: {
-    /**
-     * Changes the navigation link and logo colors to contrast the background depending on the current active section
-     */
-    // updateLinkStyles() {
-    //   let logos = document.getElementsByClassName("__logo");
-    //   let links = document.getElementsByClassName("__link");
-    //
-    // },
   },
   methods: {
     /* Section Scrolling Reference: https://webdeasy.de/en/programming-vue-js-fullpage-scroll/ */
@@ -89,14 +79,13 @@ export default {
      * Handle the 'mousewheel' event for other browsers
      */
     handleMouseWheel: function (e) {
-      console.log(e.deltaY);
-
-      if (e.deltaY > 0 && !this.isMoving) { // if the vertical scrolling value is greater than 0, we're moving up
+      if (e.deltaY > 0 && !this.isMoving) { // if vertical scrolling value > x, move up
         this.moveUp();
-      } else if (e.deltaY < 0 && !this.isMoving) { // if the vertical scrolling value is less than 0, we're moving down
+      } else if (e.deltaY < 0 && !this.isMoving) { // if vertical scrolling value < x, move down
         this.moveDown();
       }
 
+      e.preventDefault();
       return false;
     },
     /**
@@ -124,17 +113,15 @@ export default {
     /**
      * Scrolls to the passed section id if the section exists and the delay is over
      */
-    async scrollToSection(id, force = false) {
+    scrollToSection(id, force = false) {
       if (this.isMoving && !force) return false;
 
-      this.activeSection === id ? console.log("this is the current section") : this.activeSection = id;
+      this.activeSection = id;
       this.isMoving = true;
 
       // get section and scroll into view if it exists
       let section = document.getElementsByTagName("section")[id];
-      if (await section) {
-        document.getElementsByTagName("section")[id].scrollIntoView({behavior: "smooth"});
-      }
+      if (section) document.getElementsByTagName("section")[id].scrollIntoView({behavior: "smooth"});
 
       setTimeout(() => {
         this.isMoving = false;
