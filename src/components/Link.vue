@@ -1,9 +1,8 @@
 <template>
-  <a>
+  <a :data-text=text>
     {{ text }}
-    <ArrowUpRight :iconSize="iconSize"/>
+    <ArrowUpRight :iconSize="iconSize" :iconColor="iconColor" />
   </a>
-
 </template>
 
 <script>
@@ -15,15 +14,22 @@ export default {
     ArrowUpRight,
   },
   props: {
-    iconSize: {
-      type: String,
-      default: "30px",
-    },
     text: String,
-    textColor: String,
+    textColor: {
+      type: String,
+      default: "red",
+    },
     highlightColor: {
       type: String,
-      default: "var(--salmon)",
+      default: "red",
+    },
+    iconSize: {
+      type: String,
+      default: "28px",
+    },
+    iconColor: {
+      type: String,
+      default: (props) => props.textColor,
     },
   },
 };
@@ -31,34 +37,25 @@ export default {
 
 <style lang="scss" scoped>
 a {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
 
-  font-family: 'PT Sans', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--charcoal);
+  font-family: $font-family__mulish;
+  font-size: $font-size__button;
+  font-weight: $font-weight__bold;
+  color: $color__mud;
 
   border: none;
   background: none;
-  background-repeat: no-repeat;
-  background-size: 0 40%;
-  background-position: 0 90%;
-
-  transition: background-size 0.4s 0s ease;
 
   &:hover {
-    background: linear-gradient(120deg, var(--salmon) 0%, var(--salmon) 100%);
-    background-repeat: no-repeat;
-    background-size: 100% 40%;
-    background-position: 0 90%;
-
     cursor: pointer;
-
-    transition: background-size 0.4s 0s ease;
   }
+
+  @include __highlight-on-hover(v-bind(textColor), v-bind(highlightColor));
 }
 </style>

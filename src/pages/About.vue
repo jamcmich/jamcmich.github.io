@@ -1,156 +1,94 @@
 <template>
-  <div class="about-container">
-    <div class="left-column">
-      <Logo class="logo"/>
-      <span class="crumb">About</span>
-    </div>
-
-    <div class="center-column">
-      <img src="@/assets/portrait.png" alt="An image of Jacob McMichael."/>
-      <div class="text-container">
-        <h1>Hi, I'm<br><span>Jacob McMichael</span></h1>
-        <p>I'm a <span>Frontend Web Developer</span> from California with a passion for helping individuals and
-          organizations
-          accomplish their goals.</p>
-        <Link text="Read More"/>
+  <section class="about-section" data-section="about">
+    <div class="__main-content">
+      <img class="__img" src="../assets/portrait.png" alt="An image of Jacob McMichael." />
+      <div class="__text-container">
+        <h1>Hi, I'm<br><span data-text="Jacob McMichael">Jacob McMichael</span></h1>
+        <p>I'm a <span data-text="Frontend Web Developer">Frontend Web Developer</span> from California with a passion
+           for helping individuals and
+           organizations
+           accomplish their goals.</p>
+        <Link text="Read More" textColor="rgba(99, 76, 61, 1)" highlightColor="rgba(221, 190, 169, 1)" />
       </div>
     </div>
-
-    <div class="right-column">
-      <div class="menu-container">
-        <Menu/>
-      </div>
-    </div>
-  </div>
+  </section>
 </template>
 
 <script>
-import Logo from "@/components/icons/Logo";
 import Link from "@/components/Link";
-import Menu from "@/components/icons/Menu";
 
 export default {
   name: "AboutPage",
   components: {
-    Logo,
     Link,
-    Menu,
   },
 };
 </script>
 
-<style lang="scss">
-.about-container {
+<style lang="scss" scoped>
+.about-section {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
   width: 100%;
-  height: 100%;
-  padding: 100px;
+  height: 100vh;
+  padding: 0 200px;
 
-  background-color: var(--cream);
+  background-color: $color__macaroon;
 
-  .left-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    min-width: 300px;
-
-    .logo {
-      // styles...
-    }
-
-    .crumb {
-      font-family: Overlock, cursive;
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--salmon);
-    }
-  }
-
-  .center-column {
+  .__main-content {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 4.5rem;
+    gap: 96px;
 
-    img {
-      width: 300px;
-      border: 3px solid var(--salmon);
-      box-shadow: -12px 12px 0px var(--salmon);
+    .__img {
+      width: 400px;
+      box-shadow: 12px 12px 0 $color__wool;
     }
 
-    .text-container {
+    .__text-container {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-      gap: 4rem;
+      gap: 64px;
 
       h1 {
-        font-family: Overlock, cursive;
-        font-size: 4.5rem;
-        font-weight: 900;
-        line-height: 5rem;
-        color: var(--charcoal);
+        font-family: $font-family__mulish;
+        font-weight: $font-weight__semi-bold;
+        font-size: $font-size__subheading;
+        color: $color__wool;
+        line-height: 1.15;
 
         span {
-          color: var(--salmon);
+          position: relative;
+
+          font-family: $font-family__overlock;
+          font-weight: $font-weight__black;
+          font-size: $font-size__heading;
+          color: $color__mud;
+
+          @include __highlight-on-load($color__wool);
         }
       }
 
       p {
-        font-family: Signika, sans-serif;
-        font-size: 2rem;
-        font-weight: 300;
-        color: var(--charcoal);
+        font-family: $font-family__mulish;
+        font-weight: $font-weight__regular;
+        font-size: $font-size__paragraph;
+
+        max-width: 700px;
 
         span {
-          font-weight: 600;
+          position: relative;
+          font-weight: $font-weight__bold;
+
+          @include __highlight-on-load($color__wool, 1s);
         }
-      }
-    }
-  }
-
-  .right-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    min-width: 300px;
-
-    .menu-container {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-
-      width: 80px;
-      height: 80px;
-
-      border: 3px solid var(--salmon);
-      border-radius: 100px;
-      background-color: var(--cream);
-
-      cursor: pointer;
-      transition: background-color 0.4s 0s ease;
-
-      &:hover {
-        .menu {
-          path {
-            fill: var(--cream);
-            transition: fill 0.4s 0s ease;
-          }
-        }
-
-        background-color: var(--salmon);
-        transition: background-color 0.4s 0s ease;
-      }
-
-      .menu {
-
       }
     }
   }

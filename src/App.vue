@@ -1,35 +1,31 @@
 <template>
-  <About/>
+  <Navbar />
+  <About />
+  <Projects />
+  <Contact />
 </template>
 
 <script>
+import Navbar from "@/components/Navbar";
 import About from "@/pages/About";
+import Projects from "@/pages/Projects";
+import Contact from "@/pages/Contact";
 
 export default {
   name: "App",
   components: {
+    Navbar,
     About,
+    Projects,
+    Contact,
   },
 };
 </script>
 
-<style>
+<style lang="scss">
 /* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Overlock:wght@900&family=PT+Sans:wght@700&family=Signika:wght@300;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700&family=Overlock:wght@400;700;900&family=Signika:wght@400;500;600;700&display=swap'); /* Credit: https://www.joshwcomeau.com/css/custom-css-reset/ */
 
-/* Global Variables */
-:root {
-  --salmon: rgba(203, 153, 126, 1);
-  --wool: rgba(221, 190, 169, 1);
-  --cream: rgba(255, 228, 207, 1);
-  --forest-gray: rgba(184, 184, 165, 1);
-  --forest: rgba(165, 165, 141, 1);
-  --shutter-green: rgba(107, 112, 92, 1);
-  --charcoal: rgba(84, 76, 70, 1);
-  --sugar-milk: rgba(255, 250, 246, 1);
-}
-
-/* Credit: https://www.joshwcomeau.com/css/custom-css-reset/ */
 /* 1. Use a more-intuitive box-sizing model. */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -81,10 +77,10 @@ p, h1, h2, h3, h4, h5, h6 {
   align-items: center;
 
   width: 100%;
-  height: 100%;
+  height: auto;
 
   font-size: 16px;
-  color: var(--charcoal);
+  color: $color__mud;
 
   background-color: red;
 }
