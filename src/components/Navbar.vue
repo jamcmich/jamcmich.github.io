@@ -46,58 +46,64 @@ export default {
     };
   },
   mounted() {
+    this.debounceTimer = 0;
     this.sections = document.getElementsByTagName("section");
 
-    // this.handleDebouncedScroll = this.debounce(this.handleScroll, 100);
-    window.addEventListener("wheel", this.handleScroll);
-    window.addEventListener("mousedown", this.handleScroll);
+    /* the `{ passive: false }` argument prevents scrolling while allowing us to read inputs */
+    window.addEventListener("wheel", this.handleScroll, { passive: false });
   },
   methods: {
-    // debounce(func, timeout = 300) {
-    //   let timer;
-    //   return (...args) => {
-    //     if (!timer) {
-    //       func.apply(this, args);
-    //     }
-    //     clearTimeout(timer);
-    //     timer = setTimeout(() => {
-    //       timer = undefined;
-    //     }, timeout);
-    //   };
-    // },
+    debounce(callback, time) {
+      window.clearTimeout(this.debounceTimer);
+      this.debounceTimer = window.setTimeout(callback, time);
+    },
     moveUp() {
+      /* lookahead for previous `activeSection` */
       if ((this.activeSection - 1) < 0) {
         this.activeSection = this.sections.length - 1;
       } else {
         this.activeSection--;
       }
 
-      this.scrollToSection();
+      /* Prevents subsequent scrolls from overriding the `.scrollIntoView` animation */
+      if (!this.isElementInViewport(this.sections[this.activeSection])) {
+        this.scrollToSection(this.sections[this.activeSection]);
+      }
     },
     moveDown() {
+      /* lookahead for next `activeSection` */
       if ((this.activeSection + 1) > this.sections.length - 1) {
         this.activeSection = 0;
       } else {
         this.activeSection++;
       }
 
-      this.scrollToSection();
+      /* Prevents subsequent scrolls from overriding the `.scrollIntoView` animation */
+      if (!this.isElementInViewport(this.sections[this.activeSection])) {
+        this.scrollToSection(this.sections[this.activeSection]);
+      }
     },
     handleScroll(event) {
-      if (event.deltaY < 0) this.moveUp();
-      if (event.deltaY > 0) this.moveDown();
+      event.preventDefault();
+      event.stopPropagation();
 
-      // console.log(this.sections[0]);
-      // console.log(this.checkVisibleElement(this.sections[0]));
+      if (event.deltaY < 0) this.debounce(this.moveUp, 100);
+      if (event.deltaY > 0) this.debounce(this.moveDown, 100);
+
+      return false;
     },
-    // checkVisibleElement(elem) {
-    //   let rect = elem.getBoundingClientRect();
-    //   let viewHeight = Math.max(document.documentElement.clientHeight, this.windowHeight);
-    //
-    //   return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
-    // },
-    scrollToSection() {
-      this.sections[this.activeSection].scrollIntoView({behavior: "smooth"});
+    scrollToSection(element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    },
+    /* Check if `element` is in the viewport */
+    isElementInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      return (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
     },
   },
   unmounted() {
