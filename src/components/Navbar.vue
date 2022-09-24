@@ -5,26 +5,26 @@
       <LogoForeground class="__logo" :class="{'__alternative-logo': this.activeSection % 2}" />
     </a>
 
-    <ul class="__nav-links">
-      <li class="__link __active"
-          @click="scrollToSection($event.target.dataset.id)"
-          data-text="About"
-          data-id=0>
-        About
-      </li>
-      <li class="__link"
-          @click="scrollToSection($event.target.dataset.id)"
-          data-text="Projects"
-          data-id=1>
-        Projects
-      </li>
-      <li class="__link"
-          @click="scrollToSection($event.target.dataset.id)"
-          data-text="Contact"
-          data-id=2>
-        Contact
-      </li>
-    </ul>
+    <!--    <ul class="__nav-links">-->
+    <!--      <li class="__link __active"-->
+    <!--          @click="scrollToSection($event.target.dataset.id)"-->
+    <!--          data-text="About"-->
+    <!--          data-id=0>-->
+    <!--        About-->
+    <!--      </li>-->
+    <!--      <li class="__link"-->
+    <!--          @click="scrollToSection($event.target.dataset.id)"-->
+    <!--          data-text="Projects"-->
+    <!--          data-id=1>-->
+    <!--        Projects-->
+    <!--      </li>-->
+    <!--      <li class="__link"-->
+    <!--          @click="scrollToSection($event.target.dataset.id)"-->
+    <!--          data-text="Contact"-->
+    <!--          data-id=2>-->
+    <!--        Contact-->
+    <!--      </li>-->
+    <!--    </ul>-->
   </nav>
 </template>
 
@@ -40,144 +40,68 @@ export default {
   },
   data() {
     return {
-      isMoving: false,
-      isMovingDelay: 400,
+      windowHeight: window.innerHeight,
       activeSection: 0,
-      offsets: [],
-      touchStartY: 0,
+      activeClass: String,
     };
   },
-  watch: {
-    /**
-     * Changes the navigation link and logo colors to contrast the background depending on the current active section
-     */
-    activeSection(value) {
-      let links = document.getElementsByClassName("__link");
+  mounted() {
+    this.sections = document.getElementsByTagName("section");
 
-      for (let i = 0; i < links.length; i++) {
-        value % 2
-            ? links[i].classList.add("__alternative-link")
-            : links[i].classList.remove("__alternative-link");
-
-        value === i
-            ? links[i].classList.add("__active")
-            : links[i].classList.remove("__active");
-      }
-    },
+    // this.handleDebouncedScroll = this.debounce(this.handleScroll, 100);
+    window.addEventListener("wheel", this.handleScroll);
+    window.addEventListener("mousedown", this.handleScroll);
   },
   methods: {
-    /* Section Scrolling Reference: https://webdeasy.de/en/programming-vue-js-fullpage-scroll/ */
-    calculateSectionOffsets() {
-      let sections = document.getElementsByTagName("section");
-
-      for (let i = 0; i < sections.length; i++) {
-        let sectionOffset = sections[i].offsetTop;
-        this.offsets.push(sectionOffset);
-      }
-    },
-    /**
-     * Handle the 'mousewheel' event for other browsers
-     */
-    handleMouseWheel: function (e) {
-      if (e.deltaY > 0 && !this.isMoving) { // if vertical scrolling value > x, move up
-        this.moveUp();
-      } else if (e.deltaY < 0 && !this.isMoving) { // if vertical scrolling value < x, move down
-        this.moveDown();
-      }
-
-      e.preventDefault();
-      return false;
-    },
-    /**
-     * Move to the previous section or the last section if you're on the first section
-     */
-    moveDown() {
-      this.isMoving = true;
-      this.activeSection--;
-
-      if (this.activeSection < 0) this.activeSection = this.offsets.length - 1;
-
-      this.scrollToSection(this.activeSection, true);
-    },
-    /**
-     * Move to the next section or the first section if you're on the last section
-     */
-    moveUp() {
-      this.isMoving = true;
-      this.activeSection++;
-
-      if (this.activeSection > this.offsets.length - 1) this.activeSection = 0;
-
-      this.scrollToSection(this.activeSection, true);
-    },
-    /**
-     * Scrolls to the passed section id if the section exists and the delay is over
-     */
-    scrollToSection(id, force = false) {
-      if (this.isMoving && !force) return false;
-
-      this.activeSection = id;
-      this.isMoving = true;
-
-      // get section and scroll into view if it exists
-      let section = document.getElementsByTagName("section")[id];
-      if (section) document.getElementsByTagName("section")[id].scrollIntoView({behavior: "smooth"});
-
-      setTimeout(() => {
-        this.isMoving = false;
-      }, this.isMovingDelay);
-    },
-    /**
-     * Handles the 'touchstart' event on mobile devices
-     */
-    touchStart(e) {
-      e.preventDefault();
-
-      this.touchStartY = e.touches[0].clientY;
-    },
-    /**
-     * Handles the 'touchmove' event on mobile devices
-     */
-    touchMove(e) {
-      if (this.isMoving) return false;
-      e.preventDefault();
-
-      const currentY = e.touches[0].clientY;
-
-      if (this.touchStartY < currentY) {
-        this.moveDown();
-      } else {
-        this.moveUp();
-      }
-
-      this.touchStartY = 0;
-      return false;
-    },
-  },
-  /**
-   * mounted() hook executes after page load and call the section offset calculation and registers all events
-   */
-  mounted() {
-    // if (history.scrollRestoration) {
-    //   history.scrollRestoration = "manual";
-    // } else {
-    //   window.onbeforeunload = function () {
-    //     window.scrollTo(0, 0);
+    // debounce(func, timeout = 300) {
+    //   let timer;
+    //   return (...args) => {
+    //     if (!timer) {
+    //       func.apply(this, args);
+    //     }
+    //     clearTimeout(timer);
+    //     timer = setTimeout(() => {
+    //       timer = undefined;
+    //     }, timeout);
     //   };
-    // }
-    this.calculateSectionOffsets();
+    // },
+    moveUp() {
+      if ((this.activeSection - 1) < 0) {
+        this.activeSection = this.sections.length - 1;
+      } else {
+        this.activeSection--;
+      }
 
-    window.addEventListener("wheel", this.handleMouseWheel, {passive: false});  // Mozilla Firefox
-    window.addEventListener("touchstart", this.touchStart, {passive: false}); // mobile devices
-    window.addEventListener("touchmove", this.touchMove, {passive: false}); // mobile devices
+      this.scrollToSection();
+    },
+    moveDown() {
+      if ((this.activeSection + 1) > this.sections.length - 1) {
+        this.activeSection = 0;
+      } else {
+        this.activeSection++;
+      }
+
+      this.scrollToSection();
+    },
+    handleScroll(event) {
+      if (event.deltaY < 0) this.moveUp();
+      if (event.deltaY > 0) this.moveDown();
+
+      // console.log(this.sections[0]);
+      // console.log(this.checkVisibleElement(this.sections[0]));
+    },
+    // checkVisibleElement(elem) {
+    //   let rect = elem.getBoundingClientRect();
+    //   let viewHeight = Math.max(document.documentElement.clientHeight, this.windowHeight);
+    //
+    //   return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
+    // },
+    scrollToSection() {
+      this.sections[this.activeSection].scrollIntoView({behavior: "smooth"});
+    },
   },
-  /**
-   * unmounted() hook executes on page destroy and removes all registered event listeners
-   */
   unmounted() {
-    window.removeEventListener("wheel", this.handleMouseWheel); // Mozilla Firefox
-    window.removeEventListener("touchstart", this.touchStart); // mobile devices
-    window.removeEventListener("touchmove", this.touchMove); // mobile devices
+    window.removeEventListener("wheel", this.handleScroll);
   },
 };
 </script>
