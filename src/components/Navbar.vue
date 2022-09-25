@@ -10,8 +10,9 @@
           :class="[
               '__link',
               this.activeSection % 2 ? '__alternative-link' : '',
-              index === this.activeSection ? '__active' : '']"
+              this.activeSection === index ? '__active' : '']"
           :key="item.id"
+          :data-text="item.textContent"
           @click="scrollToSection(this.sections[index]); toggleActiveLink(index)">
         {{ item.textContent }}
       </li>
