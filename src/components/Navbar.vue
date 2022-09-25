@@ -5,26 +5,14 @@
       <LogoForeground class="__logo" :class="{'__alternative-logo': this.activeSection % 2}" />
     </a>
 
-    <!--    <ul class="__nav-links">-->
-    <!--      <li class="__link __active"-->
-    <!--          @click="scrollToSection($event.target.dataset.id)"-->
-    <!--          data-text="About"-->
-    <!--          data-id=0>-->
-    <!--        About-->
-    <!--      </li>-->
-    <!--      <li class="__link"-->
-    <!--          @click="scrollToSection($event.target.dataset.id)"-->
-    <!--          data-text="Projects"-->
-    <!--          data-id=1>-->
-    <!--        Projects-->
-    <!--      </li>-->
-    <!--      <li class="__link"-->
-    <!--          @click="scrollToSection($event.target.dataset.id)"-->
-    <!--          data-text="Contact"-->
-    <!--          data-id=2>-->
-    <!--        Contact-->
-    <!--      </li>-->
-    <!--    </ul>-->
+    <ul class="__nav-links">
+      <li v-for="(item, index) in listItems"
+          :class="'__link'"
+          :key="item.id"
+          @click="scrollToSection(this.sections[index]); toggleActiveLink(index)">
+        {{ item.textContent }}
+      </li>
+    </ul>
   </nav>
 </template>
 
@@ -40,7 +28,12 @@ export default {
   },
   data() {
     return {
-      windowHeight: window.innerHeight,
+      listItems: [
+        { textContent: "About" },
+        { textContent: "Projects" },
+        { textContent: "Contact" },
+      ],
+      sections: [],
       activeSection: 0,
       activeClass: String,
     };
@@ -49,8 +42,22 @@ export default {
     this.debounceTimer = 0;
     this.sections = document.getElementsByTagName("section");
 
+    /* Check which section is visible and update the `activeSection` and active link properties */
+    for (let i = 0; i < this.sections.length; i++) {
+      if (this.isElementInViewport(this.sections[i])) {
+        this.activeSection = i;
+        this.toggleActiveLink(i);
+      }
+    }
+
     /* the `{ passive: false }` argument prevents scrolling while allowing us to read inputs */
     window.addEventListener("wheel", this.handleScroll, { passive: false });
+  },
+  watch: {
+    /* If `activeSection` updates, toggle the corresponding navigation link styles */
+    activeSection(newValue, oldValue) {
+      if (newValue !== oldValue) this.toggleActiveLink(this.activeSection);
+    },
   },
   methods: {
     debounce(callback, time) {
@@ -104,6 +111,17 @@ export default {
           rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
           rect.right <= (window.innerWidth || document.documentElement.clientWidth)
       );
+    },
+    /* Toggle the active navigation link styles */
+    toggleActiveLink(index) {
+      console.log(index);
+      let elements = document.getElementsByClassName("__link");
+
+      for (let i = 0; i < elements.length; i++) {
+        i === index
+            ? elements[i].classList.add("__active")
+            : elements[i].classList.remove("__active");
+      }
     },
   },
   unmounted() {
