@@ -7,7 +7,10 @@
 
     <ul class="__nav-links">
       <li v-for="(item, index) in listItems"
-          :class="'__link'"
+          :class="[
+              '__link',
+              this.activeSection % 2 ? '__alternative-link' : '',
+              index === this.activeSection ? '__active' : '']"
           :key="item.id"
           @click="scrollToSection(this.sections[index]); toggleActiveLink(index)">
         {{ item.textContent }}
@@ -35,7 +38,6 @@ export default {
       ],
       sections: [],
       activeSection: 0,
-      activeClass: String,
     };
   },
   mounted() {
@@ -114,7 +116,6 @@ export default {
     },
     /* Toggle the active navigation link styles */
     toggleActiveLink(index) {
-      console.log(index);
       let elements = document.getElementsByClassName("__link");
 
       for (let i = 0; i < elements.length; i++) {
