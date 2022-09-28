@@ -117,7 +117,8 @@ export default {
     },
     /* Toggle the active navigation link styles */
     toggleActiveLink(index) {
-      let elements = document.querySelectorAll(".navlink .link");
+      let elements = document.getElementsByClassName("link");
+      console.log(elements);
 
       for (let i = 0; i < elements.length; i++) {
         i === index
@@ -132,141 +133,6 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.navbar-component {
-  position: fixed;
-  z-index: 1000;
-  top: 30px;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-
-  width: 100%;
-  height: 100px;
-  padding: 0 200px;
-
-  background-color: transparent;
-
-  .logo-container {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-    width: 100px;
-    height: 100px;
-
-    background-color: transparent;
-    outline: 2px solid transparent;
-
-    text-decoration: none;
-    cursor: pointer;
-
-    transition: all 0.1s ease 0.2s;
-
-    /* Background */
-    .logo:nth-child(1) {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-
-      transition: all 0.2s ease;
-
-      path {
-        fill: $color__wool;
-
-        transition: fill 0.4s ease;
-      }
-    }
-
-    /* Foreground */
-    .logo:nth-child(2) {
-      position: absolute;
-      top: 45%;
-      left: 45%;
-      transform: translate(-50%, -50%);
-
-      opacity: 100%;
-
-      transition: all 0.1s ease, opacity 0.4s ease 0.2s;
-
-      path {
-        fill: $color__pure-white;
-
-        transition: fill 0.4s ease;
-      }
-    }
-
-    /* Background */
-    .alternative-logo:nth-child(1) {
-      path {
-        fill: $color__syrup;
-
-        transition: fill 0.4s ease;
-      }
-    }
-
-    /* Foreground */
-    .alternative-logo:nth-child(2) {
-
-      transition: fill 0.4s ease;
-    }
-
-    &:hover {
-      transition: all 0.1s ease 0.2s;
-
-      /* Foreground */
-      .logo:nth-child(2) {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-
-        opacity: 0;
-
-        transition: all 0.1s ease, opacity 0.4s ease 0.2s;
-      }
-    }
-  }
-
-  .nav-links {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 72px;
-
-    color: $color__wool;
-
-    list-style-type: none;
-
-    .link {
-      position: relative;
-      cursor: pointer;
-
-      transition: color 0.4s ease;
-
-      @include __highlight-on-hover($color__mud, $color__wool);
-    }
-
-    .alternative-link {
-      color: $color__macaroon;
-
-      transition: color 0.4s ease;
-
-      @include __highlight-on-hover($color__mud, $color__syrup);
-    }
-
-    .active {
-      color: $color__mud;
-      //font-weight: $font-weight__medium;
-
-      transition: color 0.4s ease;
-    }
-  }
-}
+<style lang="scss" scoped>
+@import "@/styles/components/_navbar.scss";
 </style>

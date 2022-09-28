@@ -25,7 +25,7 @@ export default {
     },
     iconSize: {
       type: String,
-      default: "28px",
+      default: "24px",
     },
     iconColor: {
       type: String,
