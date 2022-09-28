@@ -1,0 +1,28 @@
+@use '../variables' as *;
+
+.projects-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100vh;
+  padding: 0 200px;
+
+  background-color: $color__jacobean;
+
+  h1 {
+    color: $color__mud;
+  }
+
+  .button-container {
+    border: 1px solid red;
+
+    button {
+      border: none;
+      padding: 0;
+      background-color: transparent;
+    }
+  }
+}

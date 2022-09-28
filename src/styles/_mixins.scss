@@ -10,6 +10,7 @@
 }
 
 /* Mixins */
+/* Animations & Transitions */
 @mixin __highlight-on-hover($text-color, $highlight-color) {
   * {
     z-index: 1;

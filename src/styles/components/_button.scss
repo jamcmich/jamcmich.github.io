@@ -1,0 +1,21 @@
+@use '../_variables' as *;
+
+a {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+
+  color: $color__mud;
+
+  border: none;
+  background: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @include __highlight-on-hover(v-bind(textColor), v-bind(highlightColor));
+}

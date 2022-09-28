@@ -1,5 +1,5 @@
 <template>
-  <a :data-text=text>
+  <a class="__button" :data-text=text>
     {{ text }}
     <ArrowUpRight :iconSize="iconSize" :iconColor="iconColor" />
   </a>
@@ -9,7 +9,7 @@
 import ArrowUpRight from "@/components/icons/ArrowUpRight";
 
 export default {
-  name: "LinkComponent",
+  name: "ButtonComponent",
   components: {
     ArrowUpRight,
   },
@@ -36,26 +36,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-a {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-
-  font-family: $font-family__mulish;
-  font-size: $font-size__button;
-  font-weight: $font-weight__bold;
-  color: $color__mud;
-
-  border: none;
-  background: none;
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  @include __highlight-on-hover(v-bind(textColor), v-bind(highlightColor));
-}
+@import '@/styles/components/_button.scss';
 </style>

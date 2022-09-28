@@ -1,0 +1,70 @@
+@use "../_variables.scss" as *;
+
+.contact-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+
+  width: 100%;
+  height: 100vh;
+  padding: 0 200px;
+
+  background-color: $color__macaroon;
+
+  h1 {
+    color: $color__mud;
+  }
+
+  .icon-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+
+    .icon {
+      path {
+        fill: $color__mud;
+      }
+
+      transition: all 0.4s ease;
+
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.25);
+
+        path {
+          fill: $color__syrup;
+        }
+
+        transition: all 0.4s ease;
+      }
+    }
+  }
+
+  .resume-button {
+    padding: 8px 32px;
+
+    color: $color__mud;
+    text-decoration: none;
+
+    background-color: transparent;
+    border: 3px solid $color__mud;
+    border-radius: 4px;
+
+    transition: all 0.4s ease;
+
+    &:hover {
+      background-color: $color__wool;
+
+      transition: all 0.4s ease;
+    }
+
+    &:active {
+      color: $color__macaroon;
+      background-color: $color__mud;
+    }
+  }
+}

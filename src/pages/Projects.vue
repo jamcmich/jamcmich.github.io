@@ -1,6 +1,10 @@
 <template>
   <section class="projects-section" data-section="projects">
-    <p>Hello World</p>
+    <h1 class="__heading">Projects</h1>
+    <div class="button-container">
+      <button class="__button">Professional</button>
+      <button class="__button">Personal</button>
+    </div>
   </section>
 </template>
 
@@ -12,16 +16,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.projects-section {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
-  width: 100%;
-  height: 100vh;
-  padding: 0 200px;
-
-  background-color: $color__jacobean;
-}
+@import '@/styles/pages/_projects.scss';
 </style>

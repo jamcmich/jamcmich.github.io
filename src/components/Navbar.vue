@@ -1,16 +1,16 @@
 <template>
   <nav class="navbar-component">
-    <a class="__logo-container" href="/">
-      <LogoBackground class="__logo" :class="{'__alternative-logo': this.activeSection % 2}" />
-      <LogoForeground class="__logo" :class="{'__alternative-logo': this.activeSection % 2}" />
+    <a class="logo-container" href="/">
+      <LogoBackground class="logo" :class="{'alternative-logo': this.activeSection % 2}" />
+      <LogoForeground class="logo" :class="{'alternative-logo': this.activeSection % 2}" />
     </a>
 
-    <ul class="__nav-links">
+    <ul class="nav-links">
       <li v-for="(item, index) in listItems"
           :class="[
-              '__link',
-              this.activeSection % 2 ? '__alternative-link' : '',
-              this.activeSection === index ? '__active' : '']"
+              '__link link',
+              this.activeSection % 2 ? 'alternative-link' : '',
+              this.activeSection === index ? 'active' : '']"
           :key="item.id"
           :data-text="item.textContent"
           @click="scrollToSection(this.sections[index]); toggleActiveLink(index)">
@@ -117,12 +117,12 @@ export default {
     },
     /* Toggle the active navigation link styles */
     toggleActiveLink(index) {
-      let elements = document.getElementsByClassName("__link");
+      let elements = document.querySelectorAll(".navlink .link");
 
       for (let i = 0; i < elements.length; i++) {
         i === index
-            ? elements[i].classList.add("__active")
-            : elements[i].classList.remove("__active");
+            ? elements[i].classList.add("active")
+            : elements[i].classList.remove("active");
       }
     },
   },
@@ -149,7 +149,7 @@ export default {
 
   background-color: transparent;
 
-  .__logo-container {
+  .logo-container {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -168,7 +168,7 @@ export default {
     transition: all 0.1s ease 0.2s;
 
     /* Background */
-    .__logo:nth-child(1) {
+    .logo:nth-child(1) {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -184,7 +184,7 @@ export default {
     }
 
     /* Foreground */
-    .__logo:nth-child(2) {
+    .logo:nth-child(2) {
       position: absolute;
       top: 45%;
       left: 45%;
@@ -202,7 +202,7 @@ export default {
     }
 
     /* Background */
-    .__alternative-logo:nth-child(1) {
+    .alternative-logo:nth-child(1) {
       path {
         fill: $color__syrup;
 
@@ -211,7 +211,7 @@ export default {
     }
 
     /* Foreground */
-    .__alternative-logo:nth-child(2) {
+    .alternative-logo:nth-child(2) {
 
       transition: fill 0.4s ease;
     }
@@ -220,7 +220,7 @@ export default {
       transition: all 0.1s ease 0.2s;
 
       /* Foreground */
-      .__logo:nth-child(2) {
+      .logo:nth-child(2) {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -233,7 +233,7 @@ export default {
     }
   }
 
-  .__nav-links {
+  .nav-links {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -241,13 +241,10 @@ export default {
     gap: 72px;
 
     color: $color__wool;
-    font-family: $font-family__signika;
-    font-weight: $font-weight__regular;
-    font-size: $font-size__paragraph;
 
     list-style-type: none;
 
-    .__link {
+    .link {
       position: relative;
       cursor: pointer;
 
@@ -256,7 +253,7 @@ export default {
       @include __highlight-on-hover($color__mud, $color__wool);
     }
 
-    .__alternative-link {
+    .alternative-link {
       color: $color__macaroon;
 
       transition: color 0.4s ease;
@@ -264,9 +261,9 @@ export default {
       @include __highlight-on-hover($color__mud, $color__syrup);
     }
 
-    .__active {
+    .active {
       color: $color__mud;
-      font-weight: $font-weight__medium;
+      //font-weight: $font-weight__medium;
 
       transition: color 0.4s ease;
     }

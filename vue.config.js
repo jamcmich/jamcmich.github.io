@@ -1,4 +1,4 @@
-const {defineConfig} = require("@vue/cli-service");
+const { defineConfig } = require("@vue/cli-service");
 
 /* Sharing Global SCSS Variables via Vue CLI: https://stackoverflow.com/a/50772202/9604683 */
 module.exports = defineConfig({
@@ -8,8 +8,8 @@ module.exports = defineConfig({
             // pass options to sass-loader
             sass: {
                 // @/ is an alias to src/
-                // so this assumes we have a file named `src/mixins.scss`
-                additionalData: `@import "@/styles/mixins.scss"; @import "@/styles/variables.scss";`,
+                // so this assumes we have a file named `src/_mixins.scss`
+                additionalData: `@import "@/styles/global.scss";`,
             },
         },
     },
