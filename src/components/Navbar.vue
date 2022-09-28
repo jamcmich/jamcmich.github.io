@@ -118,7 +118,6 @@ export default {
     /* Toggle the active navigation link styles */
     toggleActiveLink(index) {
       let elements = document.getElementsByClassName("link");
-      console.log(elements);
 
       for (let i = 0; i < elements.length; i++) {
         i === index

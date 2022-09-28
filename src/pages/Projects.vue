@@ -1,9 +1,16 @@
 <template>
   <section class="projects-section" data-section="projects">
+    <!-- Heading -->
     <h1 class="__heading">Projects</h1>
+
+    <!-- Button Switch -->
     <div class="button-container">
-      <button class="__button">Professional</button>
-      <button class="__button">Personal</button>
+      <button v-for="(item, index) in buttonItems"
+              :class="['__button', activeClass(index)]"
+              :key="item.id"
+              @click="toggleActiveButton(index)">
+        {{ item.textContent }}
+      </button>
     </div>
   </section>
 </template>
@@ -12,6 +19,23 @@
 
 export default {
   name: "ProjectsPage",
+  data() {
+    return {
+      buttonItems: [
+        { textContent: "Professional" },
+        { textContent: "Personal" },
+      ],
+      activeButton: 0,
+    };
+  },
+  methods: {
+    activeClass(index) {
+      return this.activeButton === index ? "active" : "";
+    },
+    toggleActiveButton(index) {
+      index === 0 ? this.activeButton = 0 : this.activeButton = 1;
+    },
+  },
 };
 </script>
 

@@ -112,7 +112,6 @@
     list-style-type: none;
 
     .link {
-      cursor: pointer;
       color: $color__wool;
 
       @include __underline-on-hover($color__mud, $color__wool);
