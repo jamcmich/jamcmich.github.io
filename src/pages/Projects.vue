@@ -14,22 +14,25 @@
     </div>
 
     <!-- Dynamic Content -->
-    <div class="card-container">
-      <div v-for="(item, index) in cardItems"
-           :key="item.id"
-           class="card"
-           @click="console.log(index)">
-        <h1 class="__subheading">{{ item.title }}</h1>
-        <p class="__paragraph">{{ item.paragraph }}</p>
-      </div>
-    </div>
+    <MasonryWall :items="cardItems" :column-width="400" :gap="16">
+      <template #default="{ item }">
+        <div class="card">
+          <h1 class="__subheading">{{ item.title }}</h1>
+          <p class="__paragraph">{{ item.paragraph }}</p>
+        </div>
+      </template>
+    </MasonryWall>
   </section>
 </template>
 
 <script>
+import MasonryWall from "@yeger/vue-masonry-wall";
 
 export default {
   name: "ProjectsPage",
+  components: {
+    MasonryWall,
+  },
   data() {
     return {
       buttonItems: ["Professional", "Personal"],

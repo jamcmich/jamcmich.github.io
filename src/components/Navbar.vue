@@ -94,6 +94,8 @@ export default {
       }
     },
     handleScroll(event) {
+      if (this.activeSection === 1) return false;
+      
       event.preventDefault();
       event.stopPropagation();
 
