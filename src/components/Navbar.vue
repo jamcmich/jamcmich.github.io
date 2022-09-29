@@ -7,13 +7,10 @@
 
     <ul class="nav-links">
       <li v-for="(item, index) in listItems"
-          :class="[
-              '__link link',
-              this.activeSection % 2 ? 'alternative-link' : '',
-              this.activeSection === index ? 'active' : '']"
+          :class="['__link link', alternateClass(), activeClass(index)]"
           :key="item.id"
           :data-text="item.textContent"
-          @click="scrollToSection(this.sections[index]); toggleActiveLink(index)">
+          @click="scrollToSection(index); toggleActiveLink(index)">
         {{ item.textContent }}
       </li>
     </ul>
@@ -45,11 +42,15 @@ export default {
     this.debounceTimer = 0;
     this.sections = document.getElementsByTagName("section");
 
-    /* Check which section is visible and update the `activeSection` and active link properties */
-    for (let i = 0; i < this.sections.length; i++) {
-      if (this.isElementInViewport(this.sections[i])) {
+    /* Check which section is visible on load, update the `activeSection`, set the active link */
+    let sections = this.sections;
+
+    for (let i = 0; i < sections.length; i++) {
+      if (this.isElementInViewport(i, 75)) {
+        // TODO: Add a way to compare which of two elements (if more than one) is most visible, and then scroll to it.
         this.activeSection = i;
-        this.toggleActiveLink(i);
+        // TODO: Scroll to top of most visible element on refresh
+        break;
       }
     }
 
@@ -59,13 +60,22 @@ export default {
   watch: {
     /* If `activeSection` updates, toggle the corresponding navigation link styles */
     activeSection(newValue, oldValue) {
-      if (newValue !== oldValue) this.toggleActiveLink(this.activeSection);
+      if (newValue !== oldValue) {
+        this.toggleActiveLink(this.activeSection);
+        this.scrollToSection(this.activeSection);
+      }
     },
   },
   methods: {
     debounce(callback, time) {
       window.clearTimeout(this.debounceTimer);
       this.debounceTimer = window.setTimeout(callback, time);
+    },
+    alternateClass() {
+      return this.activeSection % 2 ? "alternative-link" : "";
+    },
+    activeClass(index) {
+      return this.activeSection === index ? "active" : "";
     },
     moveUp() {
       /* lookahead for previous `activeSection` */
@@ -76,8 +86,9 @@ export default {
       }
 
       /* Prevents subsequent scrolls from overriding the `.scrollIntoView` animation */
-      if (!this.isElementInViewport(this.sections[this.activeSection])) {
-        this.scrollToSection(this.sections[this.activeSection]);
+      if (!this.isElementInViewport(this.activeSection)) {
+        this.scrollToSection(this.activeSection);
+        // TODO: Set timeout to prevent over-scrolling before arriving at next section.
       }
     },
     moveDown() {
@@ -89,13 +100,14 @@ export default {
       }
 
       /* Prevents subsequent scrolls from overriding the `.scrollIntoView` animation */
-      if (!this.isElementInViewport(this.sections[this.activeSection])) {
-        this.scrollToSection(this.sections[this.activeSection]);
+      if (!this.isElementInViewport(this.activeSection)) {
+        this.scrollToSection(this.activeSection);
+        // TODO: Set timeout to prevent over-scrolling before arriving at next section.
       }
     },
     handleScroll(event) {
-      if (this.activeSection === 1) return false;
-      
+      if (this.isElementInViewport(1, 40)) return false;
+
       event.preventDefault();
       event.stopPropagation();
 
@@ -104,21 +116,26 @@ export default {
 
       return false;
     },
-    scrollToSection(element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    scrollToSection(index) {
+      this.sections[index].scrollIntoView({ behavior: "smooth" });
     },
-    /* Check if `element` is in the viewport */
-    isElementInViewport(element) {
-      const rect = element.getBoundingClientRect();
-      return (
-          rect.top >= 0 &&
-          rect.left >= 0 &&
-          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    /*
+    * Check if `element` is in the viewport
+    * params { element index, threshold of visible element as percentage (0 - 100) }
+    * */
+    isElementInViewport(index, threshold = 75) {
+      let rect = this.sections[index].getBoundingClientRect(),
+          windowHeight = (window.innerHeight || document.documentElement.clientHeight);
+
+      return !(
+          Math.floor(100 - (((rect.top >= 0 ? 0 : rect.top) / +-rect.height) * 100)) < threshold ||
+          Math.floor(100 - ((rect.bottom - windowHeight) / rect.height) * 100) < threshold
       );
     },
     /* Toggle the active navigation link styles */
     toggleActiveLink(index) {
+      this.activeSection = index;
+
       let elements = document.getElementsByClassName("link");
 
       for (let i = 0; i < elements.length; i++) {
