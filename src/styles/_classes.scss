@@ -1,0 +1,46 @@
+@use '_variables' as *;
+
+/* Global Styling */
+.__heading {
+  font-family: $font-family__heading;
+  font-style: $font-style__heading;
+  font-weight: $font-weight__heading;
+  font-size: $font-size__heading;
+  line-height: $line-height__heading;
+}
+
+.__subheading {
+  font-family: $font-family__subheading;
+  font-style: $font-style__subheading;
+  font-weight: $font-weight__subheading;
+  font-size: $font-size__subheading;
+  line-height: $line-height__subheading;
+}
+
+.__paragraph {
+  font-family: $font-family__paragraph;
+  font-style: $font-style__paragraph;
+  font-weight: $font-weight__paragraph;
+  font-size: $font-size__paragraph;
+  line-height: $line-height__paragraph;
+}
+
+.__link {
+  font-family: $font-family__link;
+  font-style: $font-style__link;
+  font-weight: $font-weight__link;
+  font-size: $font-size__link;
+  line-height: $line-height__link;
+
+  cursor: pointer;
+}
+
+.__button {
+  font-family: $font-family__button;
+  font-style: $font-style__button;
+  font-weight: $font-weight__button;
+  font-size: $font-size__button;
+  line-height: $line-height__button;
+
+  cursor: pointer;
+}

@@ -1,0 +1,134 @@
+/* Keyframes */
+@keyframes highlightOnLoad {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes underlineOnLoad {
+  0% {
+    transform: scaleX(0);
+  }
+
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+/* Mixins */
+/* Animations & Transitions */
+@mixin __highlight-on-hover($text-color, $highlight-color) {
+  * {
+    z-index: 1;
+  }
+
+  &::before {
+    content: attr(data-text);
+
+    position: absolute;
+    width: 0;
+
+    overflow: hidden;
+    white-space: nowrap;
+
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 65%, $highlight-color 65%);
+
+    transition: width 0.4s ease, color 0.4s ease;
+  }
+
+  &:hover::before {
+    width: 100%;
+    color: $text-color;
+
+    transition: width 0.4s ease, color 0.4s ease;
+  }
+}
+
+@mixin __highlight-on-load($highlight-color, $animation-delay: 0s) {
+  &::before {
+    content: attr(data-text);
+
+    position: absolute;
+    width: 0;
+
+    overflow: hidden;
+    white-space: nowrap;
+
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 65%, $highlight-color 65%);
+
+    animation: 1.4s ease $animation-delay forwards highlightOnLoad;
+  }
+}
+
+@mixin __underline-static($underline-color) {
+  &::before {
+    content: "";
+    position: absolute;
+    display: block;
+
+    width: 100%;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+
+    background-color: $underline-color;
+    transform: scaleX(1);
+    transform-origin: top left;
+  }
+}
+
+@mixin __underline-on-hover($text-color, $underline-color) {
+  position: relative;
+
+  &:hover {
+    color: $text-color;
+
+    transition: color 0.4s ease;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    display: block;
+
+    width: 100%;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+
+    background-color: $underline-color;
+    transform: scaleX(0);
+    transform-origin: top left;
+
+    transition: transform 0.4s ease;
+  }
+
+  &:hover::before {
+    transform: scaleX(1);
+  }
+}
+
+@mixin __underline-on-load($underline-color, $animation-delay: 0s) {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    display: block;
+
+    width: 100%;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+
+    background-color: $underline-color;
+    transform: scaleX(0);
+    transform-origin: top left;
+
+    animation: 1.4s ease $animation-delay forwards underlineOnLoad;
+  }
+}

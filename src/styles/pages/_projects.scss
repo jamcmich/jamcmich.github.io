@@ -1,0 +1,70 @@
+@use '../variables' as *;
+
+.projects-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 64px;
+
+  width: 100%;
+  height: auto;
+  padding: 200px;
+
+  background-color: $color__jacobean;
+
+  h1 {
+    color: $color__mud;
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    border: 3px solid $color__mud;
+    border-radius: 100px;
+
+    button {
+      color: $color__mud;
+      background-color: transparent;
+      border: none;
+
+      padding: 8px 32px;
+
+      transition: color 0.4s ease;
+    }
+
+    .active {
+      color: $color__jacobean;
+      background-color: $color__mud;
+      border-radius: 100px;
+
+      transition: color 0.4s ease, background-color 0.4s ease;
+    }
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 32px;
+
+    width: 100%;
+    padding: 48px 56px;
+
+    color: $color__mud;
+    border: 3px solid $color__mud;
+
+    h1 {
+      font-size: 40px;
+    }
+
+    p {
+      font-size: 24px;
+      line-height: 40px;
+    }
+  }
+}

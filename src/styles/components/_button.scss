@@ -1,0 +1,22 @@
+@use '../_variables' as *;
+@use "../_mixins" as *;
+
+a {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+
+  color: $color__mud;
+
+  border: none;
+  background: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @include __underline-on-hover($color__mud, $color__mexican-sand);
+}
