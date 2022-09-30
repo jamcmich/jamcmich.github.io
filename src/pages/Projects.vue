@@ -14,11 +14,18 @@
     </div>
 
     <!-- Dynamic Content -->
-    <MasonryWall :items="cardItems" :column-width="400" :gap="16">
-      <template #default="{ item }">
+    <MasonryWall :items="cardItems.data" :column-width="400" :gap="16">
+      <template v-slot="{ item }">
         <div class="card">
+          <img :src="item?.image?.src" :alt="item?.image?.alt" />
           <h1 class="__subheading">{{ item.title }}</h1>
           <p class="__paragraph">{{ item.paragraph }}</p>
+
+          <div class="tag-container">
+            <span v-for="tag in item.tags" :key="tag.id" class="__tag">
+              {{ tag }}
+            </span>
+          </div>
         </div>
       </template>
     </MasonryWall>
@@ -26,6 +33,7 @@
 </template>
 
 <script>
+import data from "@/assets/projects.js";
 import MasonryWall from "@yeger/vue-masonry-wall";
 
 export default {
@@ -36,32 +44,7 @@ export default {
   data() {
     return {
       buttonItems: ["Professional", "Personal"],
-      cardItems: [
-        {
-          title: "Project Title",
-          paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        },
-        {
-          title: "Project Title",
-          paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh sagittis euismod malesuada at volutpat et, consectetur.",
-        },
-        {
-          title: "Project Title",
-          paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh sagittis euismod malesuada at volutpat et, consectetur. Vel nunc lacus, lacus in eu eget proin facilisi.",
-        },
-        {
-          title: "Project Title",
-          paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh sagittis euismod malesuada at volutpat et, consectetur. Vel nunc lacus, lacus in eu eget proin facilisi.",
-        },
-        {
-          title: "Project Title",
-          paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh sagittis euismod malesuada at volutpat et, consectetur. Vel nunc lacus, lacus in eu eget proin facilisi.",
-        },
-        {
-          title: "Project Title",
-          paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh sagittis euismod malesuada at volutpat et, consectetur. Vel nunc lacus, lacus in eu eget proin facilisi.",
-        },
-      ],
+      cardItems: data,
       activeButton: 0,
     };
   },
