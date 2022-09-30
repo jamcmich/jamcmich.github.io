@@ -14,10 +14,11 @@
     </div>
 
     <!-- Dynamic Content -->
-    <MasonryWall :items="cardItems.data" :column-width="400" :gap="16">
+    <MasonryWall :items="!this.activeButton ? cardItems.data.professional : cardItems.data.personal"
+                 :column-width="400"
+                 :gap="16">
       <template v-slot="{ item }">
         <div class="card">
-          <img :src="item?.image?.src" :alt="item?.image?.alt" />
           <h1 class="__subheading">{{ item.title }}</h1>
           <p class="__paragraph">{{ item.paragraph }}</p>
 
@@ -26,6 +27,8 @@
               {{ tag }}
             </span>
           </div>
+
+          <img :src="item?.image?.src" :alt="item?.image?.alt" />
         </div>
       </template>
     </MasonryWall>
