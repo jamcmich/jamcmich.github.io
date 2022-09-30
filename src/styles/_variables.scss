@@ -6,13 +6,15 @@ $font-family__subheading: 'Assistant', sans-serif;
 $font-family__paragraph: 'Mulish', sans-serif;
 $font-family__link: 'Assistant', sans-serif;
 $font-family__button: 'Assistant', sans-serif;
+$font-family__tag: 'Assistant', sans-serif;
 
-/* Font Families */
+/* Font Styles */
 $font-style__heading: normal;
 $font-style__subheading: normal;
 $font-style__paragraph: normal;
 $font-style__link: normal;
 $font-style__button: normal;
+$font-style__tag: normal;
 
 /* Font Weights */
 $font-weight__heading: 900;
@@ -20,6 +22,7 @@ $font-weight__subheading: 600;
 $font-weight__paragraph: 400;
 $font-weight__link: 500;
 $font-weight__button: 600;
+$font-weight__tag: 500;
 
 /* Font Sizes */
 $font-size__heading: 72px;
@@ -27,6 +30,7 @@ $font-size__subheading: 48px;
 $font-size__paragraph: 32px;
 $font-size__link: 32px;
 $font-size__button: 28px;
+$font-size__tag: 18px;
 
 /* Line Heights */
 $line-height__heading: normal;
@@ -34,6 +38,7 @@ $line-height__subheading: normal;
 $line-height__paragraph: 48px;
 $line-height__link: normal;
 $line-height__button: normal;
+$line-height__tag: normal;
 
 /* Colors */
 $color__pure-white: rgba(255, 255, 255, 1);

@@ -33,6 +33,7 @@
   line-height: $line-height__link;
 
   cursor: pointer;
+  pointer-events: auto;
 }
 
 .__button {
@@ -43,4 +44,28 @@
   line-height: $line-height__button;
 
   cursor: pointer;
+}
+
+.__tag {
+  font-family: $font-family__tag;
+  font-style: $font-style__tag;
+  font-weight: $font-weight__tag;
+  font-size: $font-size__tag;
+  line-height: $line-height__tag;
+
+  padding: 4px 16px;
+
+  border: 2px solid $color__mud;
+  border-radius: 100px;
+
+  transition: color 0.4s ease, background-color 0.4s ease;
+
+  &:hover {
+    color: $color__jacobean;
+    background-color: $color__mud;
+
+    cursor: pointer;
+
+    transition: color 0.4s ease, background-color 0.4s ease;
+  }
 }
