@@ -36,6 +36,10 @@
 
     transition: all 0.1s ease 0.2s;
 
+    .logo, .alternative-logo {
+      pointer-events: auto;
+    }
+
     /* Background */
     .logo:nth-child(1) {
       position: absolute;
@@ -111,6 +115,10 @@
 
     color: $color__wool;
     list-style-type: none;
+
+    .link, .alternate-link, {
+      pointer-events: auto;
+    }
 
     .link {
       color: $color__wool;

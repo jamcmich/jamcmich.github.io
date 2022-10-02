@@ -1,5 +1,5 @@
 <template>
-  <section class="projects-section" data-section="projects">
+  <section id="projects" class="projects-section">
     <!-- Heading -->
     <h1 class="__heading">Projects</h1>
 
