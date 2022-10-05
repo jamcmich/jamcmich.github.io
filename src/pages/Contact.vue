@@ -3,16 +3,36 @@
     <h1 class="__heading">Let's get in touch!</h1>
 
     <div class="icon-container">
-      <GitHub class="icon" />
-      <Instagram class="icon" />
-      <LinkedIn class="icon" />
-      <Twitter class="icon" />
+      <a href="https://github.com/jamcmich" target="_blank">
+        <GitHub class="icon" />
+      </a>
+      <a href="https://www.linkedin.com/in/jacobmcmichael/" target="_blank">
+        <LinkedIn class="icon" />
+      </a>
+      <a href="https://www.instagram.com/jamcmich.dev/" target="_blank">
+        <Instagram class="icon" />
+      </a>
+      <a href="https://twitter.com/jamcmich" target="_blank">
+        <Twitter class="icon" />
+      </a>
     </div>
 
-    <!-- TODO: Add downloadable resume -->
-    <a class="__button" href="../assets/resume.pdf" title="Click here to download my resume!">
-      Resume
-    </a>
+    <div class="button-container">
+      <a class="__button resume"
+         href="mailto:jacobmcmichael@gmail.com?subject=Hey%20Jake%20👋,%20I%20saw%20your%20awesome%20website%20and%20wanted%20to%20reach%20out!"
+         title="Send me an email"
+         target="_blank"
+         rel="noopener noreferrer">
+        Say Hello <span>👋</span>
+      </a>
+      <a class="__button resume"
+         href="./resume.pdf"
+         title="View my resume"
+         target="_blank"
+         rel="noopener noreferrer">
+        View Resume <span>📄</span>
+      </a>
+    </div>
   </section>
 </template>
 

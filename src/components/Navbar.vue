@@ -57,8 +57,11 @@ export default {
   mounted() {
     this.sections = document.getElementsByTagName("section");
 
-    /* Calculate the height of Project section after DOM nodes are rendered via Masonry plugin */
-    setTimeout(() => this.getSectionInViewport(this.sections), 100);
+    setTimeout(() => {
+      /* Calculate the height of Project section after DOM nodes are rendered via Masonry plugin */
+      this.getSectionInViewport(this.sections);
+      this.scrollToSection("about");
+    }, 100);
   },
   methods: {
     /**
