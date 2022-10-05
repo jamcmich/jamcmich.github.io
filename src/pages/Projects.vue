@@ -20,6 +20,8 @@
       <template v-slot="{ item }">
         <div class="card">
           <h1 class="__subheading">{{ item.title }}</h1>
+          <img :src="item?.image?.src" :alt="item?.image?.alt" />
+
           <p class="__paragraph">{{ item.paragraph }}</p>
 
           <div class="tag-container">
@@ -28,7 +30,10 @@
             </span>
           </div>
 
-          <img :src="item?.image?.src" :alt="item?.image?.alt" />
+          <Button text="Documentation"
+                  textSize="24px"
+                  textColor="rgba(99, 76, 61, 1)"
+                  highlightColor="rgba(177, 152, 130, 1)" />
         </div>
       </template>
     </MasonryWall>
@@ -38,11 +43,13 @@
 <script>
 import data from "@/assets/projects.js";
 import MasonryWall from "@yeger/vue-masonry-wall";
+import Button from "@/components/Button";
 
 export default {
   name: "ProjectsPage",
   components: {
     MasonryWall,
+    Button,
   },
   data() {
     return {

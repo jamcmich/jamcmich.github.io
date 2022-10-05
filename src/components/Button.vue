@@ -15,6 +15,10 @@ export default {
   },
   props: {
     text: String,
+    textSize: {
+      type: String,
+      default: "28px",
+    },
     textColor: {
       type: String,
       default: "red",
@@ -37,4 +41,12 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/styles/components/_button.scss';
+@use "@/styles/_mixins.scss" as *;
+
+a {
+  font-size: v-bind(textSize) !important;
+  color: v-bind(textColor);
+
+  @include __underline-on-hover(v-bind(textColor), v-bind(highlightColor));
+}
 </style>

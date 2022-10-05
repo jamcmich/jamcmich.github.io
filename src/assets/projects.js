@@ -23,7 +23,8 @@ const data = {
             },
             {
                 title: "Network Graph",
-                paragraph: "Developed a web application to help Arizona State University measure social network behaviors.",
+                paragraph: "Developed an online tool to help Arizona State University measure social network" +
+                    " behaviors.",
                 tags: [
                     "Python",
                     "JavaScript",

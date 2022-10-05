@@ -10,7 +10,7 @@
           :class="['__link link',
                   this.visibleSection === 'projects' ? 'alternative-link' : '',
                   item.toLowerCase() === this.visibleSection ? 'active' : '']"
-          :key="item.id"
+          :key="index"
           :data-text="item"
           @click="scrollToSection(this.sections[index].id)">
         {{ item }}
@@ -40,23 +40,38 @@ export default {
       visibleSection: "",
     };
   },
+  /* React to state changes */
   watch: {
-    /* If `activeSection` updates, toggle the corresponding navigation link styles */
+    /**
+     * Toggle active link in navbar
+     * @param newValue
+     * @param oldValue
+     */
     visibleSection(newValue, oldValue) {
       if (newValue !== oldValue) {
         this.toggleActiveLink(this.visibleSection);
       }
     },
   },
+  /* After the component has been mounted */
   mounted() {
     this.sections = document.getElementsByTagName("section");
-    this.getSectionInViewport(this.sections);
+
+    /* Calculate the height of Project section after DOM nodes are rendered via Masonry plugin */
+    setTimeout(() => this.getSectionInViewport(this.sections), 100);
   },
   methods: {
+    /**
+     * Click event for navbar section scrolling
+     * @param id  Corresponding section element id
+     */
     scrollToSection(id) {
       if (id !== this.visibleSection) this.sections[id].scrollIntoView({ behavior: "smooth" });
     },
-    /* Toggle the active navigation link styles */
+    /**
+     * Toggle active navbar links
+     * @param id  Corresponding link element id
+     */
     toggleActiveLink(id) {
       const elements = document.getElementsByClassName("link");
 
@@ -64,23 +79,41 @@ export default {
         element.id === id ? element.classList.add("active") : element.classList.remove("active");
       }
     },
+    /**
+     * Calculate which sections are visible in the viewport
+     * @param elements  Collection of HTML elements
+     */
     getSectionInViewport(elements) {
-      const observerOptions = {
-        root: null,
-        threshold: [0.2], // trigger if at least `t`% of element in viewport
-      };
 
-      const observer = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting) {
-          this.visibleSection = entry.target.id;
+      /* Loop over HTMLCollection */
+      for (let element of elements) {
+        const elementHeight = element.clientHeight;
 
-          return entry.target.id;
+        /* Assign a default threshold */
+        let threshold = 0.9;
+
+        /* If the element's height > viewport's height, create a unique threshold for the element */
+        if (elementHeight > (window.innerHeight * threshold)) {
+          threshold = (((window.innerHeight * threshold) / elementHeight) * threshold).toFixed(2);
         }
 
-        return this.visibleSection;
-      }, observerOptions);
+        /* IntersectionObserver options */
+        const observerOptions = {
+          root: null,
+          threshold: threshold, // trigger if at least `t`% of element in viewport
+        };
 
-      for (let element of elements) {
+        /* IntersectionObserver */
+        const observer = new IntersectionObserver(([entry]) => {
+          if (entry.isIntersecting) {
+            this.visibleSection = entry.target.id;
+
+            return entry.target.id;
+          }
+
+          return this.visibleSection;
+        }, observerOptions);
+
         observer.observe(element);
       }
     },
