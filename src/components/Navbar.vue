@@ -1,17 +1,19 @@
 <template>
   <nav class="navbar-component">
-    <a class="logo-container" href="/">
-      <LogoBackground class="logo" :class="{'alternative-logo': this.activeSection % 2}" />
-      <LogoForeground class="logo" :class="{'alternative-logo': this.activeSection % 2}" />
+    <a class="logo-container" href="">
+      <LogoBackground class="logo" :class="{'alternative-logo': this.visibleSection === 'projects'}" />
+      <LogoForeground class="logo" :class="{'alternative-logo': this.visibleSection === 'projects'}" />
     </a>
 
     <ul class="nav-links">
       <li v-for="(item, index) in listItems"
-          :class="['__link link', alternateClass(), activeClass(index)]"
-          :key="item.id"
-          :data-text="item.textContent"
-          @click="scrollToSection(index); toggleActiveLink(index)">
-        {{ item.textContent }}
+          :class="['__link link',
+                  this.visibleSection === 'projects' ? 'alternative-link' : '',
+                  item.toLowerCase() === this.visibleSection ? 'active' : '']"
+          :key="index"
+          :data-text="item"
+          @click="scrollToSection(this.sections[index].id)">
+        {{ item }}
       </li>
     </ul>
   </nav>
@@ -30,123 +32,91 @@ export default {
   data() {
     return {
       listItems: [
-        { textContent: "About" },
-        { textContent: "Projects" },
-        { textContent: "Contact" },
+        "About",
+        "Projects",
+        "Contact",
       ],
       sections: [],
-      activeSection: 0,
+      visibleSection: "",
     };
   },
+  /* React to state changes */
+  watch: {
+    /**
+     * Toggle active link in navbar
+     * @param newValue
+     * @param oldValue
+     */
+    visibleSection(newValue, oldValue) {
+      if (newValue !== oldValue) {
+        this.toggleActiveLink(this.visibleSection);
+      }
+    },
+  },
+  /* After the component has been mounted */
   mounted() {
-    this.debounceTimer = 0;
     this.sections = document.getElementsByTagName("section");
 
-    /* Check which section is visible on load, update the `activeSection`, set the active link */
-    let sections = this.sections;
-
-    for (let i = 0; i < sections.length; i++) {
-      if (this.isElementInViewport(i, 75)) {
-        // TODO: Add a way to compare which of two elements (if more than one) is most visible, and then scroll to it.
-        this.activeSection = i;
-        // TODO: Scroll to top of most visible element on refresh
-        break;
-      }
-    }
-
-    /* the `{ passive: false }` argument prevents scrolling while allowing us to read inputs */
-    window.addEventListener("wheel", this.handleScroll, { passive: false });
-  },
-  watch: {
-    /* If `activeSection` updates, toggle the corresponding navigation link styles */
-    activeSection(newValue, oldValue) {
-      if (newValue !== oldValue) {
-        this.toggleActiveLink(this.activeSection);
-        this.scrollToSection(this.activeSection);
-      }
-    },
+    /* Calculate the height of Project section after DOM nodes are rendered via Masonry plugin */
+    setTimeout(() => this.getSectionInViewport(this.sections), 100);
   },
   methods: {
-    debounce(callback, time) {
-      window.clearTimeout(this.debounceTimer);
-      this.debounceTimer = window.setTimeout(callback, time);
+    /**
+     * Click event for navbar section scrolling
+     * @param id  Corresponding section element id
+     */
+    scrollToSection(id) {
+      if (id !== this.visibleSection) this.sections[id].scrollIntoView({ behavior: "smooth" });
     },
-    alternateClass() {
-      return this.activeSection % 2 ? "alternative-link" : "";
-    },
-    activeClass(index) {
-      return this.activeSection === index ? "active" : "";
-    },
-    moveUp() {
-      /* lookahead for previous `activeSection` */
-      if ((this.activeSection - 1) < 0) {
-        this.activeSection = this.sections.length - 1;
-      } else {
-        this.activeSection--;
-      }
+    /**
+     * Toggle active navbar links
+     * @param id  Corresponding link element id
+     */
+    toggleActiveLink(id) {
+      const elements = document.getElementsByClassName("link");
 
-      /* Prevents subsequent scrolls from overriding the `.scrollIntoView` animation */
-      if (!this.isElementInViewport(this.activeSection)) {
-        this.scrollToSection(this.activeSection);
-        // TODO: Set timeout to prevent over-scrolling before arriving at next section.
+      for (let element of elements) {
+        element.id === id ? element.classList.add("active") : element.classList.remove("active");
       }
     },
-    moveDown() {
-      /* lookahead for next `activeSection` */
-      if ((this.activeSection + 1) > this.sections.length - 1) {
-        this.activeSection = 0;
-      } else {
-        this.activeSection++;
-      }
+    /**
+     * Calculate which sections are visible in the viewport
+     * @param elements  Collection of HTML elements
+     */
+    getSectionInViewport(elements) {
 
-      /* Prevents subsequent scrolls from overriding the `.scrollIntoView` animation */
-      if (!this.isElementInViewport(this.activeSection)) {
-        this.scrollToSection(this.activeSection);
-        // TODO: Set timeout to prevent over-scrolling before arriving at next section.
-      }
-    },
-    handleScroll(event) {
-      if (this.isElementInViewport(1, 40)) return false;
+      /* Loop over HTMLCollection */
+      for (let element of elements) {
+        const elementHeight = element.clientHeight;
 
-      event.preventDefault();
-      event.stopPropagation();
+        /* Assign a default threshold */
+        let threshold = 0.9;
 
-      if (event.deltaY < 0) this.debounce(this.moveUp, 100);
-      if (event.deltaY > 0) this.debounce(this.moveDown, 100);
+        /* If the element's height > viewport's height, create a unique threshold for the element */
+        if (elementHeight > (window.innerHeight * threshold)) {
+          threshold = (((window.innerHeight * threshold) / elementHeight) * threshold).toFixed(2);
+        }
 
-      return false;
-    },
-    scrollToSection(index) {
-      this.sections[index].scrollIntoView({ behavior: "smooth" });
-    },
-    /*
-    * Check if `element` is in the viewport
-    * params { element index, threshold of visible element as percentage (0 - 100) }
-    * */
-    isElementInViewport(index, threshold = 75) {
-      let rect = this.sections[index].getBoundingClientRect(),
-          windowHeight = (window.innerHeight || document.documentElement.clientHeight);
+        /* IntersectionObserver options */
+        const observerOptions = {
+          root: null,
+          threshold: threshold, // trigger if at least `t`% of element in viewport
+        };
 
-      return !(
-          Math.floor(100 - (((rect.top >= 0 ? 0 : rect.top) / +-rect.height) * 100)) < threshold ||
-          Math.floor(100 - ((rect.bottom - windowHeight) / rect.height) * 100) < threshold
-      );
-    },
-    /* Toggle the active navigation link styles */
-    toggleActiveLink(index) {
-      this.activeSection = index;
+        /* IntersectionObserver */
+        const observer = new IntersectionObserver(([entry]) => {
+          if (entry.isIntersecting) {
+            this.visibleSection = entry.target.id;
 
-      let elements = document.getElementsByClassName("link");
+            return entry.target.id;
+          }
 
-      for (let i = 0; i < elements.length; i++) {
-        i === index
-            ? elements[i].classList.add("active")
-            : elements[i].classList.remove("active");
+          return this.visibleSection;
+        }, observerOptions);
+
+        observer.observe(element);
       }
     },
-  },
-  unmounted() {
-    window.removeEventListener("wheel", this.handleScroll);
   },
 };
 </script>

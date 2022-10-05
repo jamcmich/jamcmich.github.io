@@ -1,5 +1,5 @@
 <template>
-  <section class="about-section" data-section="about">
+  <section id="about" class="about-section">
     <div class="content-container">
       <img src="../assets/portrait.png" alt="An image of Jacob McMichael." />
 
