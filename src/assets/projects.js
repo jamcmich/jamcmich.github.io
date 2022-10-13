@@ -20,6 +20,7 @@ const data = {
                     src: NovohitPreview,
                     alt: "Preview of Novohit's website.",
                 },
+                href: "https://github.com/jamcmich/novohit-website-wordpress#product-catalog",
             },
             {
                 title: "Network Graph",
@@ -37,22 +38,25 @@ const data = {
                     src: NetworkGraphPreview,
                     alt: "Preview of a Arizona State University's Network Graph.",
                 },
+                href: "",
             },
             {
-                title: "Project Title",
-                paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh sagittis euismod malesuada at volutpat et, consectetur. Vel nunc lacus, lacus in eu eget proin facilisi.",
-            },
-            {
-                title: "Project Title",
-                paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh sagittis euismod malesuada at volutpat et, consectetur. Vel nunc lacus, lacus in eu eget proin facilisi.",
-            },
-            {
-                title: "Project Title",
-                paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh sagittis euismod malesuada at volutpat et, consectetur. Vel nunc lacus, lacus in eu eget proin facilisi.",
-            },
-            {
-                title: "Project Title",
-                paragraph: "Novohit is an international Enterprise Resource Planning (ERP) software development company based in Santiago, Chile. The company distributes their logistics software to a variety of small and large businesses within the hospitality industry.",
+                title: "Future Project",
+                paragraph: "This is a placeholder. Once I complete the documentation for a future project, I'll add" +
+                    " it here!",
+                tags: [
+                    "Python",
+                    "JavaScript",
+                    "OpenPyXL",
+                    "SigmaJS",
+                    "NetworkX",
+                    "Gephi",
+                ],
+                image: {
+                    src: "https://via.placeholder.com/300",
+                    alt: "Placeholder image.",
+                },
+                href: "",
             },
         ],
     personal: [
@@ -73,22 +77,25 @@ const data = {
                 src: GooglePreview,
                 alt: "Preview of my Google Search Clone.",
             },
+            href: "https://github.com/jamcmich/google-search-clone",
         },
         {
-            title: "Project Title",
-            paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh sagittis euismod malesuada at volutpat et, consectetur. Vel nunc lacus, lacus in eu eget proin facilisi.",
-        },
-        {
-            title: "Project Title",
-            paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh sagittis euismod malesuada at volutpat et, consectetur. Vel nunc lacus, lacus in eu eget proin facilisi.",
-        },
-        {
-            title: "Project Title",
-            paragraph: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh sagittis euismod malesuada at volutpat et, consectetur. Vel nunc lacus, lacus in eu eget proin facilisi.",
-        },
-        {
-            title: "Project Title",
-            paragraph: "Novohit is an international Enterprise Resource Planning (ERP) software development company based in Santiago, Chile. The company distributes their logistics software to a variety of small and large businesses within the hospitality industry.",
+            title: "Future Project",
+            paragraph: "This is a placeholder. Once I complete the documentation for a future project, I'll add" +
+                " it here!",
+            tags: [
+                "Python",
+                "JavaScript",
+                "OpenPyXL",
+                "SigmaJS",
+                "NetworkX",
+                "Gephi",
+            ],
+            image: {
+                src: "https://via.placeholder.com/300",
+                alt: "Placeholder image.",
+            },
+            href: "",
         },
     ],
 };

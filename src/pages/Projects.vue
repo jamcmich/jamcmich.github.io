@@ -30,10 +30,12 @@
             </span>
           </div>
 
-          <Button text="Documentation"
-                  textSize="24px"
-                  textColor="rgba(99, 76, 61, 1)"
-                  highlightColor="rgba(177, 152, 130, 1)" />
+          <a :href="item.href" target="_blank">
+            <Button text="Documentation"
+                    textSize="24px"
+                    textColor="rgba(99, 76, 61, 1)"
+                    highlightColor="rgba(177, 152, 130, 1)" />
+          </a>
         </div>
       </template>
     </MasonryWall>

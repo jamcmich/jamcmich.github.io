@@ -17,7 +17,10 @@
                                for helping individuals and
                                organizations
                                accomplish their goals.</p>
-        <Button text="Read More" textColor="rgba(99, 76, 61, 1)" highlightColor="rgba(221, 190, 169, 1)" />
+        <Button text="Read More"
+                textColor="rgba(99, 76, 61, 1)"
+                highlightColor="rgba(221, 190, 169, 1)"
+                v-on:click="info()" />
       </div>
     </div>
   </section>
@@ -30,6 +33,11 @@ export default {
   name: "AboutPage",
   components: {
     Button,
+  },
+  methods: {
+    info() {
+      window.alert("Sorry! Nothing here yet. Some elements on this website, such as this one, are a work in progress.");
+    },
   },
 };
 </script>
